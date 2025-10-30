@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Einführung in die Programmierung mit ABAP (BC100)</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+    <div id="header-placeholder"></div>
+
+    <nav id="main-navigation">
+        <div id="navigation-placeholder"></div>
+    </nav>
+
+    <div class="page-wrapper">
+        <aside class="sidebar">
+            <nav class="sidebar-navigation">
+                <h3 class="sidebar-title">Kapitelübersicht</h3>
+                <ul>
+                    <li><a href="#kapitel-1">Kapitel 1: Grundlagen der ABAP-Programmierung </a></li>
+                    <li><a href="#kapitel-2">Kapitel 2: Quelltext schreiben & Debuggen </a></li>
+                    <li><a href="#kapitel-3">Kapitel 3: Ablaufsteuerungsstrukturen </a></li>
+                    <li><a href="#kapitel-4">Kapitel 4: Laufzeitfehler & Fehlerbehandlung </a></li>
+                    <li><a href="#kapitel-5">Kapitel 5: Zusätzliche Programmiertechniken </a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+
+            <section id="kapitel-1" class="content-section">
+                <h2>Kapitel 1: Grundlagen der ABAP-Programmierung </h2>
+                
+                <h3>Lektion 1: Entwickeln eines einfachen ABAP-Programms </h3>
+                <p>
+                    Ein ABAP-Programm wird im ABAP Editor (z.B. Transaktion SE38 oder SE80) angelegt. Jedes Programm benötigt Attribute, wie den Typ (z.B. "Ausführbares Programm") und einen Titel. Das erste Schlüsselwort in einem Report ist oft <code>REPORT</code>. Die Ausgabe erfolgt klassisch mit <code>WRITE</code>. Jede ABAP-Anweisung endet mit einem Punkt. Wichtige Funktionen sind Sichern ($STRG+S$), Syntax prüfen ($STRG+F2$) und Aktivieren ($STRG+F3$).
+                </p>
+
+                <h3>Lektion 2: Einführung in die ABAP-Syntax </h3>
+                <p>
+                    ABAP ist eine plattformunabhängige , aufwärtskompatible  Sprache, die SQL-Zugriffe  und Objektorientierung  unterstützt.
+                </p>
+                <ul class="styled-list">
+                    <li><strong>Anweisungen:</strong> Beginnen mit einem Schlüsselwort  und enden mit einem Punkt. Wörter werden durch Leerzeichen getrennt.</li>
+                    <li><strong>Kettensätze:</strong> Fassen Anweisungen mit gleichem Schlüsselwort zusammen. Sie beginnen mit einem Doppelpunkt (<code>:</code>) nach dem Schlüsselwort , und die einzelnen Anweisungsteile werden durch Komma (<code>,</code>) getrennt.</li>
+                    <li><strong>Kommentare:</strong> Ein Stern (<code>*</code>) am Zeilenanfang kommentiert die ganze Zeile aus. Ein Anführungszeichen (<code>"</code>) kommentiert den Rest der Zeile aus.</li>
+                    <li><strong>Hilfe:</strong> Die F1-Taste auf einem Schlüsselwort öffnet die ABAP-Schlüsselwortdokumentation.</li>
+                </ul>
+
+                <h3>Lektion 3: Implementieren von einfachen Dialogen </h3>
+                <p>
+                    Um Benutzereingaben zu ermöglichen, wird ein Selektionsbild verwendet. Das Schlüsselwort <code>PARAMETERS</code> deklariert eine Variable für die Dateneingabe. Diese Variable (z.B. <code>pa_name</code>)  fungiert als Datencontainer , dessen Inhalt im Programm für die Verarbeitung (z.B. <code>WRITE pa_name</code>)  genutzt werden kann.
+                </p>
+
+                <h3>Lektion 4: Anpassen des ABAP Editors </h3>
+                <p>
+                    Es gibt den klassischen und den neuen ABAP Editor. Der neue Editor bietet Syntax-Hervorhebung , Zeilennummern  und Code-Vorlagen. Der <strong>Pretty Printer</strong>  formatiert den Quelltext automatisch (z.B. Einrückung und Groß-/Kleinschreibung).
+                </p>
+            </section>
+
+            <section id="kapitel-2" class="content-section">
+                <h2>Kapitel 2: Quelltext schreiben und Debuggen in ABAP </h2>
+
+                <h3>Lektion 1: Definieren von einfachen Variablen </h3>
+                <p>
+                    Variablen werden benötigt, um Daten im Programm zu speichern. ABAP unterscheidet elementare Standardtypen und globale Typen aus dem ABAP Dictionary.
+                </p>
+                <ul class="styled-list">
+                    <li><strong>Standardtypen:</strong> <code>I</code> (Integer) , <code>P</code> (Gepackte Zahl, für Dezimalzahlen) , <code>STRING</code> (Zeichenkette variabel) , <code>C</code> (Zeichenkette fest) , <code>D</code> (Datum) , <code>T</code> (Uhrzeit).</li>
+                    <li><strong>Dictionary-Typen:</strong> Man kann sich auf bestehende Typen beziehen, z.B. <code>TYPE MARA-MATNR</code>.</li>
+                    <li><strong>Deklaration:</strong> Erfolgt mit <code>DATA</code>. Beispiel: <code>DATA gv_var1 TYPE i.</code>. Mit <code>LIKE</code> kann man sich auf eine andere Variable beziehen: <code>DATA gv_var2 LIKE gv_var1.</code>.</li>
+                    <li><strong>Literale:</strong> Feste Werte im Code. Textliterale stehen in Hochkommata (<code>'Hello World'</code>) , Zahlenliterale nicht (<code>123</code>).</li>
+                    <li><strong>Konstanten:</strong> Variablen mit festem Wert, die nicht geändert werden können. Deklaration: <code>CONSTANTS c_hello TYPE string VALUE 'Hello World'.</code>.</li>
+                </ul>
+
+                <h3>Lektion 2: Definieren von Textsymbolen </h3>
+                <p>
+                    Um Programme mehrsprachig zu gestalten, werden Textliterale vermieden. Stattdessen verwendet man Textsymbole. Im Code wird ein Textsymbol über eine ID (z.B. 'hel') referenziert: <code>WRITE: 'Hello' (hel), pa_name.</code>. Die Übersetzungen (DE, EN, FR etc.) werden in den Textelementen des Programms gepflegt.
+                </p>
+
+                <h3>Lektion 3: Durchführen von arithmetischen Operationen </h3>
+                <p>
+                    Variablen haben je nach Typ einen Initialwert (z.B. <code>I</code> hat <code>0</code>, <code>STRING</code> ist leer). Werte können zugewiesen werden (<code>gv_result = pa_num1 + pa_num2.</code>). Die gängigen Operatoren sind <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>. Alternativ gibt es Schlüsselwörter wie <code>ADD 1 TO gv_result.</code>.
+                </p>
+
+                <h3>Lektion 4: Verwenden von Systemvariablen </h3>
+                <p>
+                    Das System stellt vordefinierte Variablen (Systemfelder) bereit, die häufig genutzte Informationen enthalten.
+                </p>
+                <ul class="styled-list">
+                    <li><code>SY-DATUM</code>: Aktuelles Datum des Applikationsservers.</li>
+                    <li><code>SY-UZEIT</code>: Aktuelle Uhrzeit des Applikationsservers.</li>
+                    <li><code>SY-UNAME</code>: Benutzer-ID des angemeldeten Benutzers.</li>
+                </ul>
+
+                <h3>Lektion 5: Debuggen von Programmen </h3>
+                <p>
+                    Der ABAP Debugger ist das Werkzeug zur Fehleranalyse. Man startet ihn, indem man <code>/h</code> in das Befehlsfeld eingibt und Enter drückt , oder indem man Breakpoints im Code setzt. Im Debugger kann man den Wert von Variablen prüfen (per Doppelklick)  und den Code schrittweise ausführen (z.B. Einzelschritt mit F5). <strong>Watchpoints</strong> können gesetzt werden, um das Programm anzuhalten, sobald sich der Wert einer bestimmten Variable ändert.
+                </p>
+
+                <h3>Lektion 6: Anlegen von ABAP-Listen </h3>
+                <p>
+                    Klassische ABAP-Listen sind die Standardausgabe von Reports (erzeugt durch <code>WRITE</code>). Sie bieten Standardfunktionen wie Drucken, Suchen und Sichern. Die Ausgabe kann formatiert werden, z.B. mit Farben (<code>WRITE ... COLOR COL_POSITIVE.</code>)  oder Ikonen (<code>WRITE ... AS ICON.</code>). Listen- und Spaltenüberschriften können über die Textelemente gepflegt werden.
+                </p>
+
+                <h3>Lektion 7: Zeichenkettenverarbeitung </h3>
+                <p>
+                    ABAP bietet Befehle zur Manipulation von Zeichenketten:
+                </p>
+                <ul class="styled-list">
+                    <li><strong>Verketten:</strong> <code>CONCATENATE pa_fname pa_lname INTO gv_full_name SEPARATED BY space.</code>.</li>
+                    <li><strong>Suchen:</strong> <code>FIND 'Smith' IN pa_name.</code>. Das Ergebnis (Erfolg/Misserfolg) wird in <code>SY-SUBRC</code> gespeichert.</li>
+                    <li><strong>Teilen:</strong> <code>SPLIT gv_text AT ' ' INTO gv_fname gv_lname.</code>.</li>
+                </ul>
+            </section>
+
+            <section id="kapitel-3" class="content-section">
+                <h2>Kapitel 3: Ablaufsteuerungsstrukturen in ABAP </h2>
+
+                <h3>Lektion 1: Implementieren von Bedingungslogik </h3>
+                <p>
+                    Bedingungslogik (bedingte Verzweigungen ) steuert, ob ein Codeblock ausgeführt wird.
+                </p>
+                <ul class="styled-list">
+                    <li><strong>Struktur:</strong> Die Anweisung beginnt mit <code>IF</code>  und endet mit <code>ENDIF.</code>.</li>
+                    <li><strong>Alternativen:</strong> Mit <code>ELSE</code>  wird ein alternativer Block ausgeführt, falls die <code>IF</code>-Bedingung nicht zutrifft. Mit <code>ELSEIF</code>  können weitere Bedingungen geprüft werden.</li>
+                    <li><strong>Vergleichsoperatoren:</strong> <code>=</code> (EQ), <code><></code> (NE), <code>></code> (GT), <code><</code> (LT), <code>>=</code> (GE), <code><=</code> (LE).</li>
+                    <li><strong>Boolesche Operatoren:</strong> Bedingungen können mit <code>AND</code>  und <code>OR</code>  verknüpft werden. <code>NOT</code>  negiert eine Bedingung.</li>
+                </ul>
+
+                <h3>Lektion 2: Implementieren von Schleifen </h3>
+                <p>
+                    Schleifen werden für sich wiederholende Logik verwendet. Der aktuelle Schleifendurchlauf wird in der Systemvariablen <code>SY-INDEX</code> gezählt.
+                </p>
+                <ul class="styled-list">
+                    <li><strong>Endlosschleife (mit Abbruch):</strong> <code>DO. ... IF <condition>. EXIT. ENDIF. ... ENDDO.</code>.</li>
+                    <li><strong>Zählschleife:</strong> <code>DO n TIMES. ... ENDDO.</code>. Führt den Block n-mal aus.</li>
+                    <li><strong>Bedingte Schleife:</strong> <code>WHILE <condition>. ... ENDWHILE.</code>. Prüft die Bedingung vor jedem Durchlauf.</li>
+                </ul>
+            </section>
+
+            <section id="kapitel-4" class="content-section">
+                <h2>Kapitel 4: Laufzeitfehler und Fehlerbehandlung </h2>
+                
+                <h3>Lektion 1: Analysieren von Laufzeitfehlern </h3>
+                <p>
+                    Auch syntaktisch korrekte Programme können zu Laufzeitfehlern führen, z.B. bei einer Division durch Null. Dies führt zu einem <strong>ABAP-Kurzdump</strong>  (analysierbar in Transaktion ST22). Der Dump zeigt den Fehlernamen (z.B. <code>BCD_ZERODIVIDE</code>)  und den Quelltextauszug an der Fehlerstelle. Solche Fehler können durch präventive Bedingungslogik (z.B. <code>IF pa_mths <> 0.</code>) vermieden werden.
+                </p>
+
+                <h3>Lektion 2: Implementieren von Fehlerbehandlung </h3>
+                <p>
+                    Statt das Programm abstürzen zu lassen, sollte eine kontrollierte Fehlerbehandlung erfolgen, oft durch das Senden von Nachrichten.
+                </p>
+                <ul class="styled-list">
+                    <li><strong>Nachrichtentypen:</strong> <code>I</code> (Information) stoppt das Programm und zeigt ein Dialogfenster. <code>E</code> (Fehler) stoppt die Verarbeitung und zeigt die Nachricht in der Statuszeile an.</li>
+                    <li><strong>Nachrichtenklassen:</strong> Nachrichten werden in Nachrichtenklassen (Transaktion SE91) verwaltet.</li>
+                    <li><strong>Aufruf:</strong> <code>MESSAGE i001(bc100_msg).</code>. Um Variablen in den Text zu integrieren (Platzhalter) wird der Zusatz <code>WITH</code> verwendet: <code>MESSAGE i001(bc100_msg) WITH pa_hols.</code>.</li>
+                </ul>
+            </section>
+
+            <section id="kapitel-5" class="content-section">
+                <h2>Kapitel 5: Zusätzliche ABAP-Programmiertechniken </h2>
+
+                <h3>Lektion 1: Abrufen von Daten aus der Datenbank </h3>
+                <p>
+                    Der Zugriff auf Datenbanktabellen  (definiert im ABAP Dictionary, SE11 ) erfolgt über die Datenbankschnittstelle  mittels Open SQL.
+                </p>
+                <ul class="styled-list">
+                    <li><strong>SELECT-Anweisung:</strong> Der zentrale Befehl zum Lesen von Daten.</li>
+                    <li><strong>Einzelnen Satz lesen:</strong> <code>SELECT SINGLE ... FROM ... INTO ... WHERE ...</code>.
+                        <ul>
+                            <li><code>SELECT</code>: Welche Spalten? </li>
+                            <li><code>FROM</code>: Welche Tabelle? </li>
+                            <li><code>INTO</code>: Wohin im Programm? (z.B. eine Struktur) </li>
+                            <li><code>WHERE</code>: Welche Zeilen? (Filterbedingung) </li>
+                        </ul>
+                    </li>
+                    <li><strong>Erfolgsprüfung:</strong> Nach einem <code>SELECT</code>-Befehl sollte <code>SY-SUBRC</code> geprüft werden. Wenn <code>SY-SUBRC = 0</code>, war der Zugriff erfolgreich.</li>
+                </ul>
+
+                <h3>Lektion 2: Modularisierung in ABAP </h3>
+                <p>
+                    Modularisierung dient der Wiederverwendung von Quelltext. Statt denselben Codeblock in viele Programme zu kopieren, wird er zentral gekapselt und aufgerufen. Der Datenaustausch zwischen Aufrufer und aufgerufenem Block darf nicht über globale Variablen erfolgen , sondern muss über eine definierte <strong>Schnittstelle</strong> geschehen.
+                </p>
+
+                <h3>Lektion 3: Verwenden von Funktionsbausteinen </h3>
+                <p>
+                    Funktionsbausteine (Transaktion SE37 ) sind eine wichtige Technik zur Modularisierung. Sie besitzen eine feste Schnittstelle:
+                </p>
+                <ul class="styled-list">
+                    <li><strong>Importparameter:</strong> Daten, die an den Baustein übergeben werden (Eingabe).</li>
+                    <li><strong>Exportparameter:</strong> Daten, die vom Baustein zurückgegeben werden (Ausgabe).</li>
+                    <li><strong>Changing-Parameter:</strong> Werden übergeben und verändert zurückgegeben.</li>
+                    <li><strong>Ausnahmen (Exceptions):</strong> Dienen der Fehlerbehandlung. Tritt eine Ausnahme auf, wird <code>SY-SUBRC</code> auf einen Wert ungleich 0 gesetzt.</li>
+                </ul>
+                <p>
+                    Der Aufruf im Programm erfolgt mit <code>CALL FUNCTION 'FUNKTIONSBAUSTEIN_NAME' ...</code>. Im ABAP Editor kann die "Pattern"-Drucktaste (oder $STRG+F6$) verwendet werden, um eine Vorlage für den Aufruf zu generieren.
+                </p>
+            </section>
+
+        </main>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/layout.js" defer></script>
+    <script src="../js/progress.js" defer></script>
+</body>
+</html>

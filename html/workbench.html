@@ -31,6 +31,7 @@
                     <li><a href="#ablaufsteuerung">Ablaufsteuerungsstrukturen</a></li>
                     <li><a href="#fehlerbehandlung">Laufzeitfehler & Fehlerbehandlung</a></li>
                     <li><a href="#programmiertechniken">Zusätzliche Programmiertechniken</a></li>
+                    <li><a href="#transaktionscodes">Transaktionscodes erstellen</a></li>
                 </ul>
             </nav>
         </aside>
@@ -86,6 +87,84 @@
                 <p>Modularisierung dient der Wiederverwendung von Quelltext. Statt denselben Codeblock (Quelltextblock A) in viele Programme zu kopieren, wird er zentral gekapselt und aufgerufen. Der Datenaustausch zwischen Aufrufer und aufgerufenem Block darf nicht über globale Variablen erfolgen, sondern muss über eine definierte Schnittstelle geschehen.</p>
                 <h3>Verwenden von Funktionsbausteinen</h3>
                 <p>Funktionsbausteine (Transaktion SE37) sind eine wichtige Technik zur Modularisierung. Sie besitzen eine feste Schnittstelle: Importparameter: Daten, die an den Baustein übergeben werden (Eingabe). Exportparameter: Daten, die vom Baustein zurückgegeben werden (Ausgabe). Changing-Parameter: Werden übergeben und verändert zurückgegeben. Ausnahmen (Exceptions): Dienen der Fehlerbehandlung. Tritt eine Ausnahme auf, wird SY-SUBRC auf einen Wert ungleich 0 gesetzt. Der Aufruf im Programm erfolgt mit CALL FUNCTION 'FUNKTIONSBAUSTEIN_NAME' .... Im ABAP Editor kann die "Pattern"-Drucktaste (oder $STRG+F6$) verwendet werden, um eine Vorlage für den Aufruf zu generieren.</p>
+            </section>
+            <section id="transaktionscodes" class="content-section">
+                <h2>Transaktionscodes – Das Navigationssystem von SAP</h2>
+
+<p>Stell dir vor, SAP ist eine riesige Stadt voller nützlicher Orte: Banken, Werkstätten, Lagerhäuser und Büros. Wie findest du den schnellsten Weg zu dem Ort, den du brauchst? In SAP benutzt du dafür <strong>Transaktionscodes</strong> (kurz <strong>T-Codes</strong>). Sie sind die Adressen oder Kurzbefehle, die dich direkt zur gewünschten Funktion bringen.</p>
+
+<h3>Was ist ein Transaktionscode?</h3>
+
+<p>Ein Transaktionscode ist eine Zeichenfolge (z. B. <code>SE80</code> oder <code>VA01`), die eine bestimmte Funktion oder ein Programm in SAP startet. Anstatt dich durch unzählige Menüs zu klicken, gibst du einfach den T-Code in das Befehlsfeld ein und landest sofort am Ziel.</p>
+
+<p>Für Entwickler sind sie doppelt wichtig:
+<ol>
+  <li><strong>Navigation:</strong> Du springst blitzschnell zwischen Werkzeugen wie dem ABAP Editor (<code>SE38</code>), dem Data Dictionary (<code>SE11</code>) oder dem Function Builder (<code>SE37</code>).</li>
+  <li><strong>Erstellung:</strong> Du machst deine eigenen ABAP-Programme für Endanwender über einen einfachen T-Code zugänglich.</li>
+</ol></p>
+
+<p>Die meisten T-Codes folgen einem Muster. Eigene, von Kunden erstellte T-Codes beginnen immer mit <strong>Z</strong> oder <strong>Y</strong> (z. B. <code>Z_MEIN_REPORT</code>). So wird sichergestellt, dass sie nicht mit Standard-T-Codes von SAP kollidieren.</p>
+
+<h3>Wie benutze ich einen T-Code?</h3>
+
+<p>In der SAP-GUI findest du oben links das <strong>Befehlsfeld</strong>. Hier gibst du die T-Codes ein.</p>
+
+<p>Es gibt ein paar einfache, aber extrem nützliche Präfixe, die du kennen solltest:</p>
+
+<ul>
+  <li><strong>Direkter Sprung:</strong> Gib einfach den T-Code ein (z. B. <code>SE80</code>) und drücke Enter. Du springst zur neuen Transaktion.</li>
+  <li><code>/n[T-Code]</code>: <strong>Beendet</strong> die aktuelle Transaktion und startet die neue. Beispiel: Du bist in <code>SE11</code> und gibst <code>/nSE80</code> ein. Das <code>SE11</code>-Fenster wird geschlossen und <code>SE80</code> wird im selben Fenster geöffnet. Das ist der sicherste und häufigste Weg.</li>
+  <li><code>/o[T-Code]</code>: <strong>Öffnet</strong> die neue Transaktion in einem <strong>zusätzlichen Fenster</strong> (einer neuen Session). Beispiel: <code>/oVA03</code>. Deine aktuelle Arbeit bleibt unberührt und ein neues Fenster zur Anzeige eines Kundenauftrags öffnet sich.</li>
+  <li><code>/i</code>: Schließt das aktuelle Fenster (Session).</li>
+  <li><code>/nex</code>: Meldet dich vom System ab (beendet alle deine Sessions mit einer Sicherheitsabfrage).</li>
+</ul>
+
+<h3>Kurzanleitung: Deinen ersten Transaktionscode anlegen</h3>
+
+<p>Angenommen, du hast einen einfachen Report geschrieben und möchtest ihn über einen T-Code aufrufbar machen.</p>
+
+<p><strong>Voraussetzung:</strong> Ein lauffähiges ABAP-Programm. Erstelle falls nötig schnell ein Testprogramm in <code>SE38</code> mit dem Namen <code>Z_TEST_REPORT</code> und folgendem Inhalt:</p>
+
+<pre><code class="language-abap" name="Z_TEST_REPORT.abap">REPORT Z_TEST_REPORT.
+
+WRITE: / 'Hallo Welt! Mein erster T-Code funktioniert.'.
+</code></pre>
+
+<p><strong>Anleitung in 5 Schritten:</strong></p>
+
+<ol>
+  <li><strong>Starte die T-Code-Verwaltung:</strong> Gehe zur Transaktion <code>SE93</code>.</li>
+  <li><strong>Namen vergeben:</strong> Gib im Feld "Transaktion" den Namen deines neuen T-Codes ein (z. B. <code>Z_HALLO_WELT</code>) und klicke auf "Anlegen".</li>
+  <li><strong>Kurztext &amp; Typ wählen:</strong>
+    <ul>
+      <li>Gib einen aussagekräftigen <strong>Kurztext</strong> ein, z. B. "Mein erster Test-Report".</li>
+      <li>Wähle als Startobjekt die Option <strong>"Programm und Selektionsbild (Reporttransaktion)"</strong>. Dies ist der häufigste Typ für einfache Reports.</li>
+    </ul>
+  </li>
+  <li><strong>Programm zuweisen:</strong>
+    <ul>
+      <li>Gib im Feld "Programm" den Namen deines ABAP-Reports ein (<code>Z_TEST_REPORT</code>).</li>
+      <li>Die übrigen Einstellungen (z. B. GUI-Unterstützung) kannst du für den Anfang auf den Standardwerten belassen.</li>
+    </ul>
+  </li>
+  <li><strong>Speichern und Testen:</strong>
+    <ul>
+      <li>Klicke auf "Speichern". Das System fragt dich nach einem Paket. Für einen einfachen Test wähle <strong>"Lokales Objekt"</strong> (Button) oder gib <code>$TMP</code> ein. Damit wird der T-Code nicht in andere Systeme transportiert.</li>
+      <li><strong>Fertig!</strong> Gib nun deinen neuen T-Code <code>/nZ_HALLO_WELT</code> im Befehlsfeld ein. Dein Report sollte sofort ausgeführt werden.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3>Wichtige Regeln und Tipps</h3>
+
+<ul>
+  <li><strong>Kundennamensraum:</strong> Nutze immer <code>Z</code> oder <code>Y</code> für eigene Entwicklungen.</li>
+  <li><strong>Berechtigungen:</strong> Nur weil ein T-Code existiert, kann ihn nicht jeder ausführen. Benutzer benötigen die entsprechende Berechtigung in ihrer Rolle (Objekt <code>S_TCODE</code>).</li>
+  <li><strong>Transportwesen:</strong> T-Codes, die in einem Paket (nicht <code>$TMP</code>) gespeichert werden, sind "Workbench-Objekte". Sie werden über Transportaufträge in Test- und Produktivsysteme verteilt.</li>
+  <li><strong>Arten von T-Codes:</strong> Neben Reporttransaktionen gibt es u. a. <strong>Dialogtransaktionen</strong> (für komplexere Anwendungen mit mehreren Bildern/Dynpros) und <strong>Parametertransaktionen</strong> (die eine andere Transaktion mit vordefinierten Werten aufrufen).</li>
+</ul>
+
+<p><strong>Zusammenfassend lässt sich sagen:</strong> Transaktionscodes sind das Rückgrat der Navigation in SAP. Sie zu verstehen und selbst erstellen zu können, ist ein fundamentaler Schritt für jeden ABAP-Anfänger.</p>
             </section>
         </main>
     </div>

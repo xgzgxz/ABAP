@@ -26,25 +26,25 @@
             <nav class="sidebar-navigation">
                 <h3 class="sidebar-title">Kapitelübersicht</h3>
                 <ul>
-                    <li><a href="#topic-0">Kapitel 0: Setup & Systemzugang</a></li>
-                    <li><a href="#topic-1">Kapitel 1: ABAP Grundlagen & Architektur</a></li>
-                    <li><a href="#topic-2">Kapitel 2: Entwicklungsumgebung (SE80/ADT)</a></li>
-                    <li><a href="#topic-3">Kapitel 3: Datentypen & Datenwörterbuch</a></li>
-                    <li><a href="#topic-4">Kapitel 4: Interne Tabellen</a></li>
-                    <li><a href="#topic-5">Kapitel 5: Modularisierung in ABAP</a></li>
-                    <li><a href="#topic-6">Kapitel 6: Open SQL Grundlagen</a></li>
-                    <li><a href="#topic-7">Kapitel 7: Selektionsbild & klassische Listen</a></li>
-                    <li><a href="#topic-8">Kapitel 8: ALV (Simple/OO)</a></li>
-                    <li><a href="#topic-9">Kapitel 9: Debugging & Fehlerbehandlung</a></li>
-                    <li><a href="#topic-tcodes">Anhang: Wichtige Transaktionen</a></li>
+                    <li><a href="#setup">Setup & Systemzugang</a></li>
+                    <li><a href="#grundlagen-architektur">ABAP Grundlagen & Architektur</a></li>
+                    <li><a href="#entwicklungsumgebung">Entwicklungsumgebung (SE80/ADT)</a></li>
+                    <li><a href="#datentypen-dictionary">Datentypen & Datenwörterbuch</a></li>
+                    <li><a href="#interne-tabellen">Interne Tabellen</a></li>
+                    <li><a href="#modularisierung">Modularisierung in ABAP</a></li>
+                    <li><a href="#open-sql">Open SQL Grundlagen</a></li>
+                    <li><a href="#selektionsbild">Selektionsbild & klassische Listen</a></li>
+                    <li><a href="#alv">ALV (Simple/OO)</a></li>
+                    <li><a href="#debugging">Debugging & Fehlerbehandlung</a></li>
+                    <li><a href="#tcodes">Anhang: Wichtige Transaktionen</a></li>
                 </ul>
             </nav>
         </aside>
 
         <main class="main-content">
 
-            <section id="topic-0" class="content-section">
-                <h2>Kapitel 0: Setup & Systemzugang</h2>
+            <section id="setup" class="content-section">
+                <h2>Setup & Systemzugang</h2>
                 <p>
                     Willkommen zum Kurs "ABAP Workbench"! Bevor wir mit der Entwicklung beginnen, müssen wir unsere Umgebung einrichten und uns am System anmelden. Diese Schritte basieren auf der Einführungspool (Dozent: Thilo Kunz).
                 </p>
@@ -90,8 +90,8 @@
             </section>
 
 
-            <section id="topic-1" class="content-section">
-                <h2>Kapitel 1: ABAP Grundlagen & Architektur</h2>
+            <section id="grundlagen-architektur" class="content-section">
+                <h2>ABAP Grundlagen & Architektur</h2>
                 <p>
                     ABAP (Advanced Business Application Programming) ist die Kernprogrammiersprache für die meisten Geschäftsanwendungen 
                     im SAP-System, insbesondere SAP S/4HANA und SAP ERP.
@@ -111,8 +111,8 @@
                 </p>
             </section>
 
-            <section id="topic-2" class="content-section">
-                <h2>Kapitel 2: Entwicklungsumgebung (SE80/ADT)</h2>
+            <section id="entwicklungsumgebung" class="content-section">
+                <h2>Entwicklungsumgebung (SE80/ADT)</h2>
                 <p>
                     Entwicklung erfolgt klassisch in der <strong>SE80</strong> (Workbench) oder modern in <strong>ABAP Development Tools (ADT)</strong> in Eclipse.
                     Der empfohlene Weg ist ADT für moderne Syntax, Quick Fixes, Unit Tests und integrierte Tools.
@@ -123,8 +123,8 @@
                 </p>
             </section>
 
-            <section id="topic-3" class="content-section">
-                <h2>Kapitel 3: Datentypen & Datenwörterbuch</h2>
+            <section id="datentypen-dictionary" class="content-section">
+                <h2>Datentypen & Datenwörterbuch</h2>
                 <p>
                     ABAP kennt elementare Typen (z.B. <code>I</code>, <code>P</code>, <code>STRING</code>, <code>D</code>, <code>T</code>) sowie abgeleitete Typen aus dem <strong>ABAP Dictionary</strong>.
                 </p>
@@ -134,8 +134,8 @@
                 </p>
             </section>
 
-            <section id="topic-4" class="content-section">
-                <h2>Kapitel 4: Interne Tabellen</h2>
+            <section id="interne-tabellen" class="content-section">
+                <h2>Interne Tabellen</h2>
                 <p>
                     Interne Tabellen sind das zentrale Arbeitsmittel zur Verarbeitung von Datenmengen im Speicher. Typen: <strong>Standard</strong> (ohne eindeutigen Schlüssel),
                     <strong>Sortiert</strong> (sortierter Schlüssel), <strong>Hash</strong> (eindeutiger Hash-Schlüssel).
@@ -146,8 +146,8 @@
                 </p>
             </section>
 
-            <section id="topic-5" class="content-section">
-                <h2>Kapitel 5: Modularisierung in ABAP</h2>
+            <section id="modularisierung" class="content-section">
+                <h2>Modularisierung in ABAP</h2>
                 <p>
                     Wiederverwendung und Strukturierung über <strong>Unterprogramme (FORM)</strong>, <strong>Funktionsbausteine</strong> (Transaktion SE37) (remote-fähig via RFC),
                     <strong>Methoden</strong> in Klassen (Transaktion SE24) und <strong>Includes</strong> zur Code-Aufteilung.
@@ -157,8 +157,8 @@
                 </p>
             </section>
 
-            <section id="topic-6" class="content-section">
-                <h2>Kapitel 6: Open SQL Grundlagen</h2>
+            <section id="open-sql" class="content-section">
+                <h2>Open SQL Grundlagen</h2>
                 <p>
                     Open SQL kapselt DB-Zugriffe datenbankunabhängig. Kernbefehle: <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>, <code>MODIFY</code>.
                     Moderne Syntax nutzt Inline-Deklaration (<code>@DATA</code>) und <code>INTO @DATA(itab)</code>.
@@ -169,16 +169,16 @@
                 </p>
             </section>
 
-            <section id="topic-7" class="content-section">
-                <h2>Kapitel 7: Selektionsbild & klassische Listen</h2>
+            <section id="selektionsbild" class="content-section">
+                <h2>Selektionsbild & klassische Listen</h2>
                 <p>
                     Reports (Transaktion SE38) definieren Eingaben via <code>PARAMETERS</code> und <code>SELECT-OPTIONS</code> (<code>SELECTION-SCREEN</code>).
                     Klassische Ausgabe per <code>WRITE</code>, einfache Formatierung, Hotspots und basic Interaktion.
                 </p>
             </section>
 
-            <section id="topic-8" class="content-section">
-                <h2>Kapitel 8: ALV (Simple/OO)</h2>
+            <section id="alv" class="content-section">
+                <h2>ALV (Simple/OO)</h2>
                 <p>
                     Für tabellarische Ausgaben: <strong>ALV</strong>. Modern bevorzugt: <code>CL_SALV_TABLE</code> für schnelle OO-ALV-Listen.
                     Alternativ klassische Funktionsbausteine (<code>REUSE_ALV_GRID_DISPLAY</code>).
@@ -188,8 +188,8 @@
                 </p>
             </section>
 
-            <section id="topic-9" class="content-section">
-                <h2>Kapitel 9: Debugging & Fehlerbehandlung</h2>
+            <section id="debugging" class="content-section">
+                <h2>Debugging & Fehlerbehandlung</h2>
                 <p>
                     Fehlerbehandlung per <strong>Ausnahmen</strong> (klassisch <code>RAISE</code>, OO <code>RAISE EXCEPTION</code>), <code>MESSAGE</code>-Klassen (Transaktion SE91), <code>TRY...CATCH</code>.
                     Debugger (ADT/SE80) unterstützt Breakpoints, Watchpoints, Variablen-Inspektion. Bei Laufzeitfehlern hilft die Transaktion <strong>ST22</strong> (Dump-Analyse).
@@ -199,7 +199,7 @@
                 </p>
             </section>
 
-            <section id="topic-tcodes" class="content-section">
+            <section id="tcodes" class="content-section">
                 <h2>Anhang: Wichtige Transaktionen (Nachschlagen)</h2>
                 <p>
                     Hier ist eine Übersicht der wichtigsten Transaktionscodes aus dem Kurs (Quelle: `SAP-Transaktionen.pdf`).

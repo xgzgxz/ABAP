@@ -29,7 +29,7 @@ Oriented on previous CSS, pruned to what's used, with new palette.
   /* Accents mapped from palette */
   --accent-primary: var(--grape);
   --accent-secondary: var(--celeste);
-  --accent-gradient: linear-gradient(90deg, var(--grape), var(--royal-purple), var(--amethyst), var(--celeste));
+  --accent-gradient: linear-gradient(90deg, var(--grape), var(--royal-purple), var(--amethyst), var(--celeste), var(--amethyst), var(--royal-purple), var(--grape));
 }
 
 /* Base */
@@ -387,6 +387,7 @@ ol.styled-list li:hover::before { transform: none; }
 
 #check-answer-btn, #restart-quiz-btn, #repeat-incorrect-btn, #start-quiz-btn {
   background-image: var(--accent-gradient);
+  background-color: var(--grape); /* Fallback-Farbe gegen "falsche Ecken" */
   color: #ffffff;
 }
 #check-answer-btn:hover, #restart-quiz-btn:hover, #repeat-incorrect-btn:hover, #start-quiz-btn:hover,

@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             headerTitleEl.textContent = "ABAP Theorie-Quiz";
             headerSubtitleEl.textContent = "Teste dein Wissen zu SAP ABAP";
         } else { // Gilt für index.html und alle zukünftigen Seiten
-            headerTitleEl.textContent = "SAP ABAP Lernpfad";
+            headerTitleEl.textContent = "SAP ABAP";
             headerSubtitleEl.textContent = document.title;
         }
     }

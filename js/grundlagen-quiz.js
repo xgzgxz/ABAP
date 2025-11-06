@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const kapitelNamen = {
+    1: "Grundlagen & Basissyntax",
+    2: "Datentypen, Texte & Debugging",
+    3: "Ablaufsteuerung (Bedingungen & Schleifen)",
+    4: "Laufzeitfehler & Fehlerbehandlung",
+    5: "Datenbankzugriff & Modularisierung"
+  };
   const alleQuizFragen = [
     // --- Kapitel 1: Grundlagen der ABAP-Programmierung ---
     {
@@ -190,7 +197,7 @@ let aktiveFragen = [];
   const deselectAllBtn = document.getElementById("deselect-all-chapters-btn");
 
   // NEUER Key für LocalStorage (um Konflikte mit anderen Quizzen zu vermeiden)
-  const quizStorageKey = "abapPraxisQuizChapterSelection_v1";
+  const quizStorageKey = "abapGrundlagenQuizChapterSelection_v1";
   
   // --- Logik zur Kapitelauswahl ---
   function setupChapterSelection() {
@@ -200,32 +207,26 @@ let aktiveFragen = [];
     // NEU: Gespeicherte Auswahl laden
     let savedChapters = null;
     try {
-      const savedData = localStorage.getItem(quizStorageKey);
-      if (savedData) {
-        savedChapters = JSON.parse(savedData);
+      const saved = localStorage.getItem(quizStorageKey);
+      if (saved) {
+        savedChapters = JSON.parse(saved);
       }
     } catch (e) {
-      console.warn("Could not load chapter selection:", e);
-      savedChapters = null; // Bei Fehler zurücksetzen
+      console.error("Fehler beim Laden der Kapitelauswahl:", e);
+      savedChapters = null;
     }
     // ENDE NEU
 
     chapters.forEach(chapter => {
-      const optionEl = document.createElement('div');
-      optionEl.className = 'setting-option';
-      
-      // NEU: Haken basierend auf Speicher setzen
-      // Standard: checked, WENN nichts gespeichert ist (savedChapters === null)
-      // ODER wenn Kapitel in gespeicherter Liste ist.
-      const isChecked = (savedChapters === null) || (Array.isArray(savedChapters) && savedChapters.includes(chapter));
-      // ENDE NEU
-
-      const checkboxId = `chapter-${chapter}`;
-      optionEl.innerHTML = `
-        <input type="checkbox" id="${checkboxId}" class="chapter-checkbox" data-chapter="${chapter}" ${isChecked ? 'checked' : ''}>
-        <label for="${checkboxId}">Kapitel ${chapter}</label>
+      const isChecked = savedChapters ? savedChapters.includes(chapter) : true; // Standardmäßig an, wenn nichts gespeichert ist
+      const chapterName = kapitelNamen[chapter] || `Kapitel ${chapter}`;
+      const optionDiv = document.createElement('div');
+      optionDiv.classList.add('chapter-option');
+      optionDiv.innerHTML = `
+        <input type="checkbox" id="chapter-${chapter}" class="chapter-checkbox" value="${chapter}" ${isChecked ? 'checked' : ''}>
+        <label for="chapter-${chapter}">${chapterName}</label>
       `;
-      chapterOptionsContainer.appendChild(optionEl);
+      chapterOptionsContainer.appendChild(optionDiv);
     });
 
     const chapterCheckboxes = document.querySelectorAll('.chapter-checkbox');
@@ -245,8 +246,8 @@ let aktiveFragen = [];
     // Event Listener für einzelne Kapitel-Checkboxen
     chapterCheckboxes.forEach(cb => {
       cb.addEventListener('change', () => {
-        const allChecked = [...chapterCheckboxes].every(box => box.checked);
-        selectAllChaptersToggle.checked = allChecked;
+        const allAreChecked = [...chapterCheckboxes].every(box => box.checked);
+        selectAllChaptersToggle.checked = allAreChecked;
       });
     });
   }
@@ -414,7 +415,7 @@ let aktiveFragen = [];
   startQuizBtn.addEventListener("click", () => {
     const selectedChapters = [];
     document.querySelectorAll('.chapter-checkbox:checked').forEach(cb => {
-        selectedChapters.push(parseInt(cb.dataset.chapter, 10));
+        selectedChapters.push(parseInt(cb.value, 10));
     });
     
     // NEU: Auswahl im LocalStorage speichern

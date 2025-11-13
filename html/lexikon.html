@@ -76,7 +76,7 @@
                 </dl>
                 <dl class="lexicon-entry">
                     <dt>ALV (ABAP List Viewer)</dt>
-                    <dd>Ein mächtiges Werkzeug zur Darstellung von tabellarischen Daten in Listenform. Bietet Standardfunktionen wie Sortieren, Filtern, Summenbildung und Layout-Verwaltung. Die moderne Variante ist <code>CL_SALV_TABLE</code>.</dd>
+                    <dd>Ein mächtiges Werkzeug zur Darstellung von tabellarischen Daten in Listenform. Bietet Standardfunktionen wie Sortieren, Filtern, Summenbildung und Layout-Verwaltung. Die moderne Variante für Reports ist <code>CL_SALV_TABLE</code>. Für die Einbettung in Dynpros wird <code>CL_GUI_ALV_GRID</code> verwendet.</dd>
                 </dl>
                 <dl class="lexicon-entry">
                     <dt>Anwendungsschicht (Application Layer)</dt>
@@ -84,6 +84,14 @@
                 </dl>
 
                 <h2 id="b">B</h2>
+                <dl class="lexicon-entry">
+                    <dt>BAPI (Business Application Programming Interface)</dt>
+                    <dd>Eine standardisierte, RFC-fähige Schnittstelle (meist ein Funktionsbaustein) zur Interaktion mit SAP-Geschäftsobjekten (z.B. 'Kunde anlegen'). BAPIs werden über das BOR (Business Object Repository) verwaltet.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>BOR (Business Object Repository)</dt>
+                    <dd>Das BOR (Kap. 4, Lektion 5) ist ein zentrales Verzeichnis im SAP-System, das Geschäftsobjekte (z.B. 'Kunde', 'Auftrag') und deren Methoden (BAPIs) kapselt.</dd>
+                </dl>
                 <dl class="lexicon-entry">
                     <dt>Breakpoint</dt>
                     <dd>Ein Haltepunkt im Quellcode, der die Ausführung des Programms im Debugger an dieser Stelle unterbricht, um eine Analyse zu ermöglichen.</dd>
@@ -97,6 +105,10 @@
                 <dl class="lexicon-entry">
                     <dt>Client (Mandant)</dt>
                     <dd>Eine organisatorisch und technisch eigenständige Einheit innerhalb eines SAP-Systems mit eigenen Stammdaten und Bewegungsdaten. Die Anmeldung erfolgt immer an einem bestimmten Mandanten.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Code Inspector (SCI)</dt>
+                    <dd>Ein Werkzeug (Transaktion <code>SCI</code>) zur statischen Analyse von ABAP-Code und anderen Repository-Objekten. Es prüft auf Performance-Probleme, Sicherheitslücken, Syntaxfehler und Einhaltung von Programmierrichtlinien. Es ist die Basis für das ABAP Test Cockpit (ATC).</dd>
                 </dl>
                 <dl class="lexicon-entry">
                     <dt><code>CONCATENATE</code></dt>
@@ -124,11 +136,15 @@
                     <dt><code>DO</code>-Schleife</dt>
                     <dd>Eine Schleifenstruktur in ABAP, die entweder eine feste Anzahl von Durchläufen (<code>DO n TIMES</code>) oder eine Endlosschleife (die mit <code>EXIT</code> verlassen werden muss) implementiert.</dd>
                 </dl>
+                <dl class="lexicon-entry">
+                    <dt>Dynpro (Dynamic Program)</dt>
+                    <dd>Ein "Bild" (Screen) einer klassischen ABAP-Anwendung (Transaktion <code>SE51</code>). Es besteht aus einem Layout (visuelle Elemente), einer Elementliste (Variablen) und einer Ablauflogik (PBO und PAI).</dd>
+                </dl>
 
                 <h2 id="e">E</h2>
                 <dl class="lexicon-entry">
                     <dt>Exception (Ausnahme)</dt>
-                    <dd>Ein Mechanismus zur Fehlerbehandlung. In Funktionsbausteinen oder Methoden können Ausnahmen definiert werden, die im Fehlerfall ausgelöst und vom aufrufenden Programm behandelt werden können.</dd>
+                    <dd>Ein Mechanismus zur Fehlerbehandlung. In Funktionsbausteinen (klassisch) oder Methoden (klassenbasiert) können Ausnahmen definiert werden, die im Fehlerfall ausgelöst und vom aufrufenden Programm behandelt werden können.</dd>
                 </dl>
 
                 <h2 id="f">F</h2>
@@ -173,6 +189,10 @@
                     <dd>Das zentrale Konstrukt der objektorientierten Programmierung in ABAP. Sie kapselt Daten (Attribute) und Verhalten (Methoden). Wird im Class Builder (<code>SE24</code>) oder lokal im Programm definiert.</dd>
                 </dl>
                 <dl class="lexicon-entry">
+                    <dt>Kopfzeile (Header Line)</dt>
+                    <dd>Eine veraltete Methode (implizite Syntax), um einen Arbeitsbereich für eine interne Tabelle zu deklarieren. Dabei hat die interne Tabelle selbst eine Kopfzeile, die denselben Namen wie die Tabelle trägt. Moderne ABAP-Entwicklung (explizite Syntax) verwendet stattdessen separate Arbeitsbereiche (z.B. mittels <code>DATA gs_data LIKE LINE OF gt_data</code>).</dd>
+                </dl>
+                <dl class="lexicon-entry">
                     <dt>Kurzdump</dt>
                     <dd>Ein Laufzeitfehler, der die Ausführung eines Programms abbricht. Kann in der Transaktion <code>ST22</code> analysiert werden.</dd>
                 </dl>
@@ -201,12 +221,20 @@
 
                 <h2 id="p">P</h2>
                 <dl class="lexicon-entry">
+                    <dt>PAI (Process After Input)</dt>
+                    <dd>Ein Ereignisblock in der Ablauflogik eines Dynpros. Die Module in diesem Block werden ausgeführt, *nachdem* der Benutzer eine Aktion auf dem Bild ausgeführt hat (z.B. Enter gedrückt oder einen Button geklickt hat).</dd>
+                </dl>
+                <dl class="lexicon-entry">
                     <dt>Paket (Package)</dt>
                     <dd>Ein Container für zusammengehörige Entwicklungsobjekte. Pakete steuern die Transportierbarkeit von Objekten. Objekte im lokalen Paket <code>$TMP</code> sind nicht transportierbar.</dd>
                 </dl>
                 <dl class="lexicon-entry">
                     <dt><code>PARAMETERS</code></dt>
                     <dd>ABAP-Schlüsselwort zur Definition eines einzelnen Eingabefeldes auf einem Selektionsbild.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>PBO (Process Before Output)</dt>
+                    <dd>Ein Ereignisblock in der Ablauflogik eines Dynpros. Die Module in diesem Block werden ausgeführt, *bevor* das Bild (Dynpro) dem Benutzer angezeigt wird. Wird typischerweise verwendet, um Felder vorzubelegen oder den GUI-Status zu setzen.</dd>
                 </dl>
                 <dl class="lexicon-entry">
                     <dt>Präsentationsschicht (Presentation Layer)</dt>
@@ -220,13 +248,17 @@
                 <h2 id="r">R</h2>
                 <dl class="lexicon-entry">
                     <dt>RFC (Remote Function Call)</dt>
-                    <dd>Ein Protokoll, das den Aufruf eines Funktionsbausteins in einem anderen SAP-System oder von einem externen System aus ermöglicht.</dd>
+                    <dd>Ein Protokoll, das den Aufruf eines Funktionsbausteins in einem anderen SAP-System oder von einem externen System aus ermöglicht. BAPIs sind ein typischer Anwendungsfall für RFC.</dd>
                 </dl>
 
                 <h2 id="s">S</h2>
                 <dl class="lexicon-entry">
                     <dt>SAP GUI</dt>
                     <dd>Die grafische Benutzeroberfläche für den Zugriff auf SAP-Systeme. Sie ist die klassische Präsentationsschicht.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>SCARR</dt>
+                    <dd>Eine Datenbanktabelle aus dem SAP-Flugmodell. Sie enthält die Stammdaten der Fluggesellschaften (z.B. 'LH' für Lufthansa).</dd>
                 </dl>
                 <dl class="lexicon-entry">
                     <dt>SE80 (Object Navigator)</dt>
@@ -249,6 +281,10 @@
                     <dd>Ein Typ einer internen Tabelle, deren Einträge immer nach ihrem Schlüssel sortiert sind. Dies ermöglicht schnelle Lesezugriffe über binäre Suche.</dd>
                 </dl>
                 <dl class="lexicon-entry">
+                    <dt>SPFLI</dt>
+                    <dd>Eine Datenbanktabelle aus dem SAP-Flugmodell. Sie enthält den Flugplan, d.h. die permanenten Flugverbindungen (z.B. 'LH 400' von Frankfurt nach New York).</dd>
+                </dl>
+                <dl class="lexicon-entry">
                     <dt>Standardtabelle</dt>
                     <dd>Der flexibelste Typ einer internen Tabelle. Der Zugriff erfolgt über einen Index oder linear über den Schlüssel. Sie hat keinen fest definierten Schlüssel.</dd>
                 </dl>
@@ -264,7 +300,7 @@
                 <h2 id="t">T</h2>
                 <dl class="lexicon-entry">
                     <dt>Transaktion</dt>
-                    <dd>Ein Kürzel (Transaktionscode), das eine bestimmte Funktion oder ein Programm im SAP-System aufruft (z.B. <code>SE80</code>, <code>ST22</code>).</dd>
+                    <dd>Ein Kürzel (Transaktionscode), das eine bestimmte Funktion oder ein Programm im SAP-System aufruft (z.B. <code>SE80</code>, <code>ST22</code>). Report-Transaktionen können in <code>SE93</code> angelegt werden.</dd>
                 </dl>
                 <dl class="lexicon-entry">
                     <dt>Transport</dt>
@@ -281,6 +317,10 @@
                 <dl class="lexicon-entry">
                     <dt>Watchpoint</dt>
                     <dd>Ein spezieller Haltepunkt im Debugger, der die Programmausführung stoppt, sobald sich der Wert einer bestimmten Variable ändert.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Web Dynpro ABAP</dt>
+                    <dd>Eine moderne SAP-Technologie zur Erstellung von Web-basierten Benutzeroberflächen. Es folgt strikt dem Model-View-Controller (MVC) Design-Pattern und nutzt Konzepte wie Views, Windows, Controller und einen Daten-Context zur Datenbindung.</dd>
                 </dl>
                 <dl class="lexicon-entry">
                     <dt><code>WHILE</code>-Schleife</dt>

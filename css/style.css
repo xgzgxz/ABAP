@@ -1,5 +1,4 @@
-/* 
-================================================
+/* ================================================
 THEME: "ABAP LEARNER" (Purple-Blue)
 Oriented on previous CSS, pruned to what's used, with new palette.
 ================================================
@@ -55,7 +54,7 @@ body {
   top: 80px;
   align-self: flex-start;
   height: calc(100vh - 80px);
-  overflow-y: auto;
+  /* KORREKTUR: 'overflow-y: auto;' hier entfernt, da es den Sticky-Kontext bricht */
   padding: 2em 1em;
   display: flex;
   flex-direction: column;
@@ -86,7 +85,7 @@ body {
 
 .sidebar-navigation {
   flex-grow: 1;
-  overflow-y: auto;
+  overflow-y: auto; /* DIES ist die korrekte Stelle für den Scrollbalken */
 }
 
 .sidebar-navigation h3 {

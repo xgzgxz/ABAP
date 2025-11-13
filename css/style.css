@@ -315,7 +315,63 @@ ol.styled-list li::before {
   top: 0; left: -0.5em;
 }
 ol.styled-list li:hover::before { transform: none; }
+/* ================================================
+   TABLE STYLES
+   ================================================ */
+.content-section table {
+    width: 100%;
+    margin-top: 1.5em;
+    margin-bottom: 2.5em;
+    border-collapse: collapse;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden; /* Wichtig für abgerundete Ecken */
+}
 
+.content-section th,
+.content-section td {
+    padding: 1em 1.2em;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.content-section thead th {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 1.2em;
+    color: var(--accent-secondary);
+    background-color: var(--background-dark);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.content-section tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.content-section tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.content-section tbody tr:hover {
+    background-color: rgba(185, 250, 248, 0.04); /* Celeste tint */
+}
+
+/* Spezieller Stil für die erste Spalte (Standardtypen) */
+.content-section tbody td:first-child {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: var(--accent-primary);
+    background-color: var(--background-dark);
+    font-size: 1.05em;
+}
+
+/* Titel für die Tabellen */
+.content-section h4 {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 1.3em;
+    color: var(--accent-secondary);
+    margin-top: 2.5em;
+    margin-bottom: 0.5em;
+}
 /* Quiz */
 .quiz-section {
   background-color: var(--background-card);

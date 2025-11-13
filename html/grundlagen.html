@@ -47,15 +47,74 @@
                     ABAP unterscheidet verschiedene Datentypen, um den unterschiedlichen Anforderungen an Datenverarbeitung gerecht zu werden.
                 </p>
                 <h3>1. Elementare Datentypen</h3>
-                <ul class="styled-list">
-                    <li><code>I</code>: Ganzzahl (Integer)</li>
-                    <li><code>F</code>: Fließkommazahl (Floating point)</li>
-                    <li><code>P</code>: Gepackte Zahl (Packed number), z.B. für Dezimalzahlen</li>
-                    <li><code>C</code>: Zeichenkette (Character string), festgelegt</li>
-                    <li><code>STRING</code>: Zeichenkette, variabel</li>
-                    <li><code>D</code>: Datum</li>
-                    <li><code>T</code>: Uhrzeit</li>
-                </ul>
+                
+                <h4>Vollständige ABAP Standardtypen</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Standardtypen</th>
+                            <th>Beschreibung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>D</td>
+                            <td>Typ für Datum (D), Format: JJJJMMTT, Länge 8 (fix)</td>
+                        </tr>
+                        <tr>
+                            <td>T</td>
+                            <td>Typ für Uhrzeit (T), Format: HHMMSS, Länge 6 (fix)</td>
+                        </tr>
+                        <tr>
+                            <td>I, INT8</td>
+                            <td>Typ für Integer, entweder Länge 4 (fix) (für I), oder Länge 8 (fix) (für INT8)</td>
+                        </tr>
+                        <tr>
+                            <td>F</td>
+                            <td>Typ für Gleitpunktzahl (Floating point number), Länge 8 (fix)</td>
+                        </tr>
+                        <tr>
+                            <td>STRING</td>
+                            <td>Typ für Zeichenfolge dynamischer Länge</td>
+                        </tr>
+                        <tr>
+                            <td>XSTRING</td>
+                            <td>Typ für Byte-Folge dynamischer Länge (HeXadecimal string)</td>
+                        </tr>
+                        <tr>
+                            <td>DECFLOAT16, DECFLOAT34</td>
+                            <td>Typ zum Sichern von Zahlen mit Mantisse und Exponent (DECimal FLOATing point), entweder Länge 8 Byte mit 16 Dezimalstellen (fix) (für DECFLOAT16) oder Länge 16 Byte mit 34 Dezimalstellen (fix) (für DECFLOAT34)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Unvollständige ABAP Standardtypen</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Standardtypen</th>
+                            <th>Beschreibung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>C</td>
+                            <td>Typ für Zeichenfolge (Character), für welche die Länge angegeben werden muss</td>
+                        </tr>
+                        <tr>
+                            <td>N</td>
+                            <td>Typ für numerische Zeichenfolge (Numerical character), für welche die Länge angegeben werden muss</td>
+                        </tr>
+                        <tr>
+                            <td>X</td>
+                            <td>Typ für Byte-Folge (HeXadecimal), für welche die Länge angegeben werden muss</td>
+                        </tr>
+                        <tr>
+                            <td>P</td>
+                            <td>Typ für gepackte Zahl (Packed number), für welche die Länge angegeben werden muss (beim Definieren einer gepackten Zahl kann auch die Anzahl der Dezimalstellen angegeben werden)</td>
+                        </tr>
+                    </tbody>
+                </table>
 
                 <h3>2. Komplexe Datentypen</h3>
                 <ul class="styled-list">

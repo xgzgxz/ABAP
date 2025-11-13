@@ -52,9 +52,10 @@ body {
   flex: 0 0 240px;
   position: sticky;
   top: 80px;
+  bottom: 0; /* NEU: Sorgt dafür, dass das Element unten nicht überläuft */
   align-self: flex-start;
-  height: calc(100vh - 80px);
-  /* KORREKTUR: 'overflow-y: auto;' hier entfernt, da es den Sticky-Kontext bricht */
+  height: calc(100vh - 80px); /* Fallback für ältere Browser */
+  height: calc(100dvh - 80px); /* Bevorzugte Einheit für moderne Browser */
   padding: 2em 1em;
   display: flex;
   flex-direction: column;
@@ -86,6 +87,7 @@ body {
 .sidebar-navigation {
   flex-grow: 1;
   overflow-y: auto; /* DIES ist die korrekte Stelle für den Scrollbalken */
+  padding-bottom: 2em; /* NEU: Abstand am Ende der scrollbaren Liste */
 }
 
 .sidebar-navigation h3 {

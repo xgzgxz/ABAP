@@ -28,6 +28,7 @@
                 <ul>
                     <li><a href="#setup">Setup & Systemzugang</a></li>
                     <li><a href="#grundlagen-architektur">ABAP Grundlagen & Architektur</a></li>
+                    <li><a href="#flugmodell">Das SAP-Flugmodell (Kontext)</a></li>
                     <li><a href="#entwicklungsumgebung">Entwicklungsumgebung (SE80/ADT)</a></li>
                     <li><a href="#datentypen-dictionary">Datentypen & Datenwörterbuch</a></li>
                     <li><a href="#interne-tabellen">Interne Tabellen</a></li>
@@ -111,14 +112,33 @@
                 </p>
             </section>
 
+            <section id="flugmodell" class="content-section">
+                <h2>Das SAP-Flugmodell (Kontext)</h2>
+                <p>
+                    Als zentrale Schulungs- und Beispiel-Datenbank verwendet SAP (und auch das BC400-Skript) das sogenannte <strong>Flugmodell</strong>. Es beschreibt die Beziehungen zwischen Fluggesellschaften, Flugverbindungen, Flügen und Buchungen.
+                </p>
+                <p>
+                    Die Kenntnis der wichtigsten Tabellen ist essenziell, um die meisten ABAP-Beispiele zu verstehen:
+                </p>
+                <ul class="styled-list">
+                    <li><code>SCARR</code>: Die Stammdatentabelle für <strong>Fluggesellschaften</strong> (z.B. 'LH' für Lufthansa, 'AA' für American Airlines). Enthält den Namen der Gesellschaft und die Währung.</li>
+                    <li><code>SPFLI</code>: Die Tabelle für <strong>Flugverbindungen</strong> (der "Flugplan"). Sie definiert, welche Gesellschaft (<code>CARRID</code>) regelmäßig eine bestimmte Strecke (<code>CONNID</code>) fliegt, z.B. von <code>AIRPFROM</code> (Abflughafen) nach <code>AIRPTO</code> (Zielhafen).</li>
+                    <li><code>SFLIGHT</code>: Die Tabelle für <strong>konkrete Flüge</strong>. Sie bezieht sich auf eine Flugverbindung (<code>CARRID</code>, <code>CONNID</code>) und fügt ein Datum (<code>FLDATE</code>) hinzu. Hier sind auch Daten zur Belegung (<code>SEATSMAX</code>, <code>SEATSOCC</code>) gespeichert.</li>
+                    <li><code>SBOOK</code>: Die Tabelle der <strong>Flugbuchungen</strong>. Jede Buchung bezieht sich auf einen konkreten Flug (<code>CARRID</code>, <code>CONNID</code>, <code>FLDATE</code>) und einen Kunden (<code>CUSTOMID</code>).</li>
+                </ul>
+                <p>
+                    Diese Tabellen werden im ABAP Dictionary (SE11) definiert und in fast allen Beispielen zu Open SQL, ALV, Dynpros und Web Dynpros verwendet.
+                </p>
+            </section>
+
             <section id="entwicklungsumgebung" class="content-section">
                 <h2>Entwicklungsumgebung (SE80/ADT)</h2>
                 <p>
-                    Entwicklung erfolgt klassisch in der <strong>SE80</strong> (Workbench) oder modern in <strong>ABAP Development Tools (ADT)</strong> in Eclipse.
+                    Entwicklung erfolgt klassisch in der <strong>SE80</strong> (Object Navigator) oder modern in <strong>ABAP Development Tools (ADT)</strong> in Eclipse.
                     Der empfohlene Weg ist ADT für moderne Syntax, Quick Fixes, Unit Tests und integrierte Tools.
                 </p>
                 <p>
-                    Artefakte werden in <strong>Paketen</strong> organisiert. Lokale Objekte ($TMP) sind transportfrei, produktive Objekte benötigen ein Paket und
+                    Artefakte werden in <strong>Paketen</strong> organisiert. Lokale Objekte (<code>$TMP</code>) sind transportfrei, produktive Objekte benötigen ein Paket und
                     eine <strong>Transportaufgabe</strong>.
                 </p>
             </section>
@@ -144,6 +164,9 @@
                     Häufige Operationen: <code>APPEND</code>, <code>INSERT</code>, <code>READ TABLE ... WITH KEY ...</code>, <code>LOOP AT</code>, <code>SORT</code>, <code>DELETE</code>.
                     In moderner Syntax kommen Ausdrücke wie <strong>FILTER</strong>, <strong>REDUCE</strong> und <strong>FOR</strong> hinzu.
                 </p>
+                <p>
+                    <strong>Wichtiger Hinweis (Kopfzeilen):</strong> In den BC400-Skripten wird der Unterschied zwischen modernen internen Tabellen (mit explizitem Arbeitsbereich, z.B. <code>DATA gs_data LIKE LINE OF gt_data</code>) und der <strong>veralteten</strong> Syntax mit <strong>Kopfzeile</strong> (Header Line) betont. Bei der Kopfzeilen-Syntax (z.B. <code>DATA itab TYPE table WITH HEADER LINE</code>) dient die Tabelle selbst implizit als Arbeitsbereich. Diese alte Syntax sollte in neuen Entwicklungen (wie in allen Beispielen auf dieser Seite) nicht mehr verwendet werden, da sie zu unleserlichem Code führt.
+                </p>
             </section>
 
             <section id="modularisierung" class="content-section">
@@ -151,6 +174,9 @@
                 <p>
                     Wiederverwendung und Strukturierung über <strong>Unterprogramme (FORM)</strong>, <strong>Funktionsbausteine</strong> (Transaktion SE37) (remote-fähig via RFC),
                     <strong>Methoden</strong> in Klassen (Transaktion SE24) und <strong>Includes</strong> zur Code-Aufteilung.
+                </p>
+                <p>
+                    Eine spezielle, standardisierte Form von Funktionsbausteinen sind <strong>BAPIs</strong> (Business Application Programming Interfaces). Sie werden im <strong>Business Object Repository (BOR)</strong> (Kap. 4, Lektion 5) verwaltet und dienen als stabile Schnittstellen, um auf SAP-Geschäftsobjekte (z.B. einen Kundenauftrag) zuzugreifen. Sie sind immer RFC-fähig und werden oft von externen Systemen genutzt.
                 </p>
                 <p>
                     Best Practice: Neue Entwicklungen objektorientiert (globale/lokale Klassen), klare Schnittstellen und Unit Tests.
@@ -184,6 +210,9 @@
                     Alternativ klassische Funktionsbausteine (<code>REUSE_ALV_GRID_DISPLAY</code>).
                 </p>
                 <p>
+                    <strong>Hinweis (Kap. 9):</strong> Eine weitere wichtige Variante ist die Klasse <code>CL_GUI_ALV_GRID</code>. Im Gegensatz zu <code>CL_SALV_TABLE</code> (das den Bildschirm "übernimmt"), wird <code>CL_GUI_ALV_GRID</code> verwendet, um ein ALV-Gitter in einen <strong>Container</strong> auf einem <strong>klassischen Dynpro</strong> (siehe Kapitel 8 des Skripts) einzubetten.
+                </p>
+                <p>
                     Funktionen: Sortieren, Filtern, Summen, Layouts sichern, Export.
                 </p>
             </section>
@@ -195,7 +224,7 @@
                     Debugger (ADT/SE80) unterstützt Breakpoints, Watchpoints, Variablen-Inspektion. Bei Laufzeitfehlern hilft die Transaktion <strong>ST22</strong> (Dump-Analyse).
                 </p>
                 <p>
-                    Qualitätssicherung über <strong>ABAP Unit</strong> und <strong>ATC</strong> (Code-Checks).
+                    Qualitätssicherung über <strong>ABAP Unit</strong> und <strong>ATC</strong> (Code-Checks). <strong>(Ergänzung zu Kap. 11):</strong> Die technische Basis für ATC ist oft der <strong>Code Inspector (Transaktion SCI)</strong>, der detaillierte statische Analysen (Performance, Sicherheit, Syntax) für ABAP-Objekte durchführt.
                 </p>
             </section>
 

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anpassung der SAP-Standardsoftware (BC400)</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+    <div id="header-placeholder"></div>
+
+    <nav id="main-navigation">
+        <div id="navigation-placeholder"></div>
+    </nav>
+
+    <div class="page-wrapper">
+        <aside class="sidebar">
+            <nav class="sidebar-navigation">
+                <h3 class="sidebar-title">Kapitelübersicht</h3>
+                <ul>
+                    <li><a href="#anpassungsarten">Arten der Anpassung</a></li>
+                    <li><a href="#erweiterungen">Erweiterungen (Exits)</a></li>
+                    <li><a href="#modifikation">Modifikation (Reparatur)</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <h1>Anpassung der SAP-Standardsoftware (Kap. 13)</h1>
+            <p>
+                Kein SAP-System wird im reinen Standard betrieben. Das BC400-Skript beschreibt die verschiedenen technischen Möglichkeiten, um das SAP-System an Kundenbedürfnisse anzupassen. Man unterscheidet hierbei fundamental zwischen kunden- und SAP-eigenen Objekten.
+            </p>
+
+            <section id="anpassungsarten" class="content-section">
+                <h2>Vier Arten der Anpassung</h2>
+                <p>
+                    Gemäß Abbildung 254 gibt es vier primäre Wege, das System anzupassen, geordnet von der "besten" (empfohlen) zur "schlechtesten" (riskantesten) Methode:
+                </p>
+                <ol class="styled-list">
+                    <li>
+                        <strong>Customizing</strong>
+                        <p class="list-sub-item">Die Konfiguration des Systems über vordefinierte Einstellungs-Transaktionen (im SPRO). Dies ist kein ABAP-Development, sondern die reine Parametrisierung des Standards.</p>
+                    </li>
+                    <li>
+                        <strong>Kundenentwicklung (Z-Objekte)</strong>
+                        <p class="list-sub-item">Das Erstellen von komplett eigenen Entwicklungen (Programme, Tabellen, Klassen etc.) im Kundennamensraum (z.B. <code>Z_MEIN_REPORT</code>). Diese Objekte sind "Originale" im Kundensystem und kollidieren nicht mit dem SAP-Standard.</p>
+                    </li>
+                    <li>
+                        <strong>Erweiterung (Enhancement)</strong>
+                        <p class="list-sub-item">Der "saubere" Weg, um SAP-Standardcode zu ergänzen. SAP baut an vordefinierten Stellen "Haken" (Hooks) ein, an denen Kunden eigenen Code einfügen können. Diese Erweiterungen werden bei einem Upgrade automatisch mit übernommen.</p>
+                    </li>
+                    <li>
+                        <strong>Modifikation (Reparatur)</strong>
+                        <p class="list-sub-item">Die direkte Änderung am SAP-Standardquellcode (einer "Kopie" des SAP-Objekts im Kundensystem). Dies ist der riskanteste Weg, da diese Änderungen bei jedem SAP-Upgrade (z.B. Einspielen von Service Packs) im **Modifikationsabgleich** (Transaktion <code>SPAU</code>) manuell nachgepflegt werden müssen.</p>
+                    </li>
+                </ol>
+            </section>
+
+            <section id="erweiterungen" class="content-section">
+                <h2>Erweiterungen (Exits) im Detail</h2>
+                <p>
+                    Erweiterungen (auch "Exits" genannt) sind von SAP explizit vorgesehene Sprungmarken im Standard-Code. Das Skript listet verschiedene Generationen dieser Technik auf:
+                </p>
+                <ul class="styled-list">
+                    <li>
+                        <strong>User-Exits</strong>
+                        <p class="list-sub-item">Die älteste Form, oft in SD-Modulen. Meist leere Unterprogramme (FORMs) in einem Include-Programm, das von SAP aufgerufen wird.</p>
+                    </li>
+                    <li>
+                        <strong>Customer-Exits</strong>
+                        <p class="list-sub-item">Verwaltet über Transaktionen <code>SMOD</code> (Definition) und <code>CMOD</code> (Implementierung). Sie umfassen Funktionsbaustein-Exits (<code>CALL CUSTOMER-FUNCTION</code>), Menü-Exits (eigene Menüpunkte hinzufügen) und Dynpro-Exits (eigene Subscreens in SAP-Dynpros einblenden).</p>
+                    </li>
+                    <li>
+                        <strong>Business Add-Ins (BAdIs)</strong>
+                        <p class="list-sub-item">Die moderne, objektorientierte (OO) Form der Erweiterung. SAP definiert ein Interface, und der Kunde implementiert eine oder mehrere Klassen, die dieses Interface implementieren. Das SAP-Programm ruft dann die aktiven Implementierungen auf.</p>
+                    </li>
+                    <li>
+                        <strong>Business Transaction Events (BTEs)</strong>
+                        <p class="list-sub-item">Eine Technik, die hauptsächlich im Finanzwesen (FI) verwendet wird, um auf bestimmte Geschäftsvorfälle zu reagieren.</p>
+                    </li>
+                    <li>
+                        <strong>Append-Strukturen</strong>
+                        <p class="list-sub-item">Eine Erweiterungsmöglichkeit im ABAP Dictionary. Hiermit können kundeneigene Felder an Standard-SAP-Tabellen angehängt werden (z.B. ein "Z-Feld" an die Tabelle <code>MARA</code>), ohne die Tabelle selbst zu modifizieren.</p>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="modifikation" class="content-section">
+                <h2>Modifikation &amp; SSCR</h2>
+                <p>
+                    Eine Modifikation ist eine **Reparatur** eines SAP-Objekts und sollte nur durchgeführt werden, wenn absolut keine andere Möglichkeit (Customizing, Erweiterung) besteht.
+                </p>
+                <p>
+                    Um den SAP-Standardcode direkt zu ändern, ist die **SAP Software Change Registration (SSCR)** erforderlich. Dieser Mechanismus dient der Protokollierung und erfordert zwei Schlüssel:
+                </p>
+                <ul class="styled-list">
+                    <li>
+                        <strong>Entwicklerschlüssel:</strong> Muss jeder Entwickler einmalig registrieren, um überhaupt SAP-Objekte ändern zu dürfen.
+                    </li>
+                    <li>
+                        <strong>Objektschlüssel (Zugriffsschlüssel):</strong> Wird für *jedes* SAP-Objekt benötigt, das modifiziert werden soll (z.B. für ein bestimmtes Programm oder Include).
+                    </li>
+                </ul>
+                <p>
+                    Jede Modifikation führt, wie oben erwähnt, zu Aufwand beim **Modifikationsabgleich** nach einem System-Upgrade.
+                </p>
+            </section>
+
+        </main>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/layout.js" defer></script>
+    <script src="../js/progress.js" defer></script>
+</body>
+</html>

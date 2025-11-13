@@ -46,6 +46,7 @@
                     <li><a href="#r">R</a></li>
                     <li><a href="#s">S</a></li>
                     <li><a href="#t">T</a></li>
+                    <li><a href="#u">U</a></li>
                     <li><a href="#v">V</a></li>
                     <li><a href="#w">W</a></li>
                 </ul>
@@ -82,8 +83,16 @@
                     <dt>Anwendungsschicht (Application Layer)</dt>
                     <dd>Die mittlere Schicht in der 3-Schichten-Architektur, auf der die ABAP-Anwendungslogik im Application Server ausgeführt wird.</dd>
                 </dl>
+                <dl class="lexicon-entry">
+                    <dt>Append-Struktur</dt>
+                    <dd>Eine Erweiterungstechnik im ABAP Dictionary. Dient dazu, kundeneigene Felder an Standard-SAP-Tabellen, -Strukturen oder -Views anzuhängen, ohne das SAP-Objekt selbst zu modifizieren.</dd>
+                </dl>
 
                 <h2 id="b">B</h2>
+                <dl class="lexicon-entry">
+                    <dt>BAdI (Business Add-In)</dt>
+                    <dd>Die moderne, objektorientierte (OO) Form der Erweiterung (Exits). SAP definiert ein Interface, und der Kunde kann eine oder mehrere Klassen implementieren, die dieses Interface implementieren, um die Standardlogik zu erweitern.</dd>
+                </dl>
                 <dl class="lexicon-entry">
                     <dt>BAPI (Business Application Programming Interface)</dt>
                     <dd>Eine standardisierte, RFC-fähige Schnittstelle (meist ein Funktionsbaustein) zur Interaktion mit SAP-Geschäftsobjekten (z.B. 'Kunde anlegen'). BAPIs werden über das BOR (Business Object Repository) verwaltet.</dd>
@@ -114,6 +123,10 @@
                     <dt><code>CONCATENATE</code></dt>
                     <dd>ABAP-Anweisung zur Verkettung von mehreren Zeichenketten.</dd>
                 </dl>
+                <dl class="lexicon-entry">
+                    <dt>Customer-Exit</dt>
+                    <dd>Eine ältere Erweiterungstechnik (verwaltet über <code>SMOD</code>/<code>CMOD</code>). SAP ruft an definierten Stellen einen Funktionsbaustein (<code>CALL CUSTOMER-FUNCTION</code>) auf, den der Kunde mit eigener Logik füllen kann. Beinhaltet oft auch Menü- und Dynpro-Exits.</dd>
+                </dl>
 
                 <h2 id="d">D</h2>
                 <dl class="lexicon-entry">
@@ -142,6 +155,10 @@
                 </dl>
 
                 <h2 id="e">E</h2>
+                <dl class="lexicon-entry">
+                    <dt>Erweiterung (Enhancement)</dt>
+                    <dd>Der von SAP empfohlene, "saubere" Weg, um SAP-Standardanwendungen anzupassen. Dabei wird an vordefinierten "Hooks" (z.B. BAdIs, Customer-Exits) kundeneigener Code eingefügt, ohne das SAP-Originalobjekt zu verändern. Erweiterungen sind upgrade-sicher.</dd>
+                </dl>
                 <dl class="lexicon-entry">
                     <dt>Exception (Ausnahme)</dt>
                     <dd>Ein Mechanismus zur Fehlerbehandlung. In Funktionsbausteinen (klassisch) oder Methoden (klassenbasiert) können Ausnahmen definiert werden, die im Fehlerfall ausgelöst und vom aufrufenden Programm behandelt werden können.</dd>
@@ -207,6 +224,10 @@
                 <dl class="lexicon-entry">
                     <dt>Methode</dt>
                     <dd>Eine Funktion oder Prozedur, die zu einer Klasse gehört und deren Verhalten implementiert.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Modifikation (Reparatur)</dt>
+                    <dd>Die direkte Änderung (eine "Reparatur") am SAP-Standardcode oder -Objekt. Dies ist nicht upgrade-sicher und erfordert einen manuellen Modifikationsabgleich (<code>SPAU</code>) nach jedem Upgrade. Erfordert SSCR-Schlüssel.</dd>
                 </dl>
                 <dl class="lexicon-entry">
                     <dt>Modularisierung</dt>
@@ -285,6 +306,10 @@
                     <dd>Eine Datenbanktabelle aus dem SAP-Flugmodell. Sie enthält den Flugplan, d.h. die permanenten Flugverbindungen (z.B. 'LH 400' von Frankfurt nach New York).</dd>
                 </dl>
                 <dl class="lexicon-entry">
+                    <dt>SSCR (SAP Software Change Registration)</dt>
+                    <dd>Ein Registrierungsverfahren, das erforderlich ist, um Modifikationen am SAP-Standard durchzuführen. Man benötigt einen <strong>Entwicklerschlüssel</strong> (einmalig pro User) und einen <strong>Objektschlüssel</strong> (pro modifiziertem Objekt).</dd>
+                </dl>
+                <dl class="lexicon-entry">
                     <dt>Standardtabelle</dt>
                     <dd>Der flexibelste Typ einer internen Tabelle. Der Zugriff erfolgt über einen Index oder linear über den Schlüssel. Sie hat keinen fest definierten Schlüssel.</dd>
                 </dl>
@@ -305,6 +330,12 @@
                 <dl class="lexicon-entry">
                     <dt>Transport</dt>
                     <dd>Ein Mechanismus, um Entwicklungsobjekte (z.B. Programme, Tabellen) von einem System in ein anderes zu übertragen (z.B. vom Entwicklungs- ins Testsystem).</dd>
+                </dl>
+
+                <h2 id="u">U</h2>
+                <dl class="lexicon-entry">
+                    <dt>User-Exit</dt>
+                    <dd>Die älteste Form der Erweiterungstechnik, oft als leere Unterprogramme (FORMs) in Standardprogrammen (z.B. im SD-Modul) implementiert, die der Kunde mit Logik füllen kann.</dd>
                 </dl>
 
                 <h2 id="v">V</h2>

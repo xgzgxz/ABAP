@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klassische Dynpro-Programmierung (BC400)</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+    <div id="header-placeholder"></div>
+
+    <nav id="main-navigation">
+        <div id="navigation-placeholder"></div>
+    </nav>
+
+    <div class="page-wrapper">
+        <aside class="sidebar">
+            <nav class="sidebar-navigation">
+                <h3 class="sidebar-title">Kapitelübersicht</h3>
+                <ul>
+                    <li><a href="#grundlagen">Dynpro Grundlagen (PBO/PAI)</a></li>
+                    <li><a href="#navigation-okcode">Navigation &amp; OK_CODE</a></li>
+                    <li><a href="#datentransport">Klassischer Datentransport</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <h1>Klassische Dynpro-Programmierung (Kap. 8)</h1>
+            <p>
+                Während ausführbare Reports (Programme vom Typ 1) auf Selektionsbildern starten und Listen erzeugen, dient die **Dialogprogrammierung** (Programme vom Typ 'M' - Modulpool) der Erstellung von interaktiven, bildschirmbasierten Anwendungen. Die Bildschirme werden in SAP als **Dynpros** (Dynamic Programs) bezeichnet.
+            </p>
+
+            <section id="grundlagen" class="content-section">
+                <h2>Dynpro Grundlagen (PBO/PAI)</h2>
+                <p>
+                    Ein Dynpro (Transaktion <strong>SE51</strong>, der "Screen Painter") besteht aus mehreren Komponenten:
+                </p>
+                <ul class="styled-list">
+                    <li><strong>Eigenschaften:</strong> Attribute wie Dynpro-Nummer (z.B. 100, 200), Dynpro-Typ und Folge-Dynpro.</li>
+                    <li><strong>Layout:</strong> Die visuelle Gestaltung, auf der Elemente wie Ein-/Ausgabefelder, Drucktasten und Rahmen platziert werden.</li>
+                    <li><strong>Elementliste:</strong> Die Liste aller Felder (Datencontainer), die im Layout verwendet werden.</li>
+                    <li><strong>Ablauflogik (Flow Logic):</strong> Das Herzstück des Dynpros. Es steuert die Verarbeitung und ist in zwei Haupt-Ereignisblöcke unterteilt.</li>
+                </ul>
+
+                <h3>PBO und PAI: Die Verarbeitungslogik</h3>
+                <p>Die Ablauflogik eines Dynpros wird durch zwei wesentliche Ereignisse gesteuert:</p>
+                <ol class="styled-list">
+                    <li>
+                        <strong>PROCESS BEFORE OUTPUT (PBO)</strong>
+                        <p class="list-sub-item">Wird ausgeführt, <strong>bevor</strong> das Dynpro (z.B. Dynpro 100) angezeigt wird. Hier werden ABAP-<code>MODULE</code> aufgerufen (z.B. <code>MODULE status_0100 OUTPUT.</code>), um den Bildschirm vorzubereiten (z.B. GUI-Status setzen, Felder deaktivieren oder vorbefüllen).</p>
+                    </li>
+                    <li>
+                        <strong>PROCESS AFTER INPUT (PAI)</strong>
+                        <p class="list-sub-item">Wird ausgeführt, <strong>nachdem</strong> der Benutzer eine Aktion auf dem Dynpro auslöst (z.B. "Enter" drückt oder eine Drucktaste anklickt). Hier werden ABAP-<code>MODULE</code> aufgerufen (z.B. <code>MODULE user_command_0100 INPUT.</code>), um die Benutzereingaben zu validieren und die weitere Programmlogik (z.B. Navigation) zu steuern.</p>
+                    </li>
+                </ol>
+                <p>Der eigentliche ABAP-Code (die Verarbeitungsblöcke) liegt nicht im Dynpro selbst, sondern in <code>MODULE ... ENDMODULE.</code>-Blöcken im zugehörigen ABAP-Programm (Modulpool).</p>
+            </section>
+
+            <section id="navigation-okcode" class="content-section">
+                <h2>Navigation &amp; OK_CODE Handling</h2>
+                <p>
+                    Die Navigation zwischen Dynpros wird fast ausschließlich im PAI-Prozess gesteuert.
+                </p>
+                <h3>Der OK_CODE (Funktionscode)</h3>
+                <p>
+                    Jede interaktive Aktion (z.B. Klick auf eine Drucktaste wie "Zurück" oder "Beenden") löst einen **Funktionscode** (FktCode) aus. Dieser Code wird vom Dynpro an eine spezielle Variable im ABAP-Programm übergeben.
+                </p>
+                <p>
+                    Diese Variable (oft <code>ok_code</code> genannt) muss im ABAP-Programm global deklariert werden, und zwar mit Bezug auf das Systemfeld <code>sy-ucomm</code>:
+                </p>
+                <pre><code>DATA ok_code LIKE sy-ucomm.</code></pre>
+                
+                <h3>Verarbeitung im PAI-Modul</h3>
+                <p>
+                    Innerhalb eines PAI-Moduls (z.B. <code>MODULE user_command_0100</code>) wird dieser <code>ok_code</code> ausgewertet, um die nächste Aktion zu bestimmen. Dies geschieht typischerweise mit einer <code>CASE</code>-Anweisung:
+                </p>
+                <pre><code>MODULE user_command_0100 INPUT.
+  CASE ok_code.
+    WHEN 'GO'.  " z.B. "Weiter" Taste
+      SET SCREEN 200. " Springe zu Dynpro 200
+    WHEN 'BACK'.
+      SET SCREEN 100. " Springe zurück zu Dynpro 100
+    WHEN 'EXIT'.
+      SET SCREEN 0.   " Beende die Transaktion
+  ENDCASE.
+ENDMODULE.</code></pre>
+                <ul class="styled-list">
+                    <li><code>SET SCREEN [nummer]</code>: Setzt das Folge-Dynpro dynamisch. Das Programm verlässt das aktuelle Dynpro am Ende des PAI und springt in das PBO des neuen Dynpros.</li>
+                    <li><code>SET SCREEN 0</code>: Eine spezielle Anweisung, die das Dynpro-Processing beendet und zum Aufrufer zurückkehrt (z.B. zurück zum SAP Easy Access Menü).</li>
+                </ul>
+            </section>
+
+            <section id="datentransport" class="content-section">
+                <h2>Klassischer Datentransport (Kap. 8, Lektion 3)</h2>
+                <p>
+                    Um Daten zwischen dem ABAP-Programm und den Feldern des Dynpros auszutauschen, nutzt die klassische Dynpro-Programmierung einen (heute als veraltet geltenden) Mechanismus, der auf globalen Variablen und Namensgleichheit basiert.
+                </p>
+                <h3>Der <code>TABLES</code>-Befehl</h3>
+                <p>
+                    Im ABAP-Programm (Modulpool) wird eine globale Strukturvariable mit dem <code>TABLES</code>-Befehl deklariert. Diese Struktur muss im ABAP Dictionary (SE11) definiert sein (z.B. <code>BC400_S_DYNCONN</code>).
+                </p>
+                <pre><code>PROGRAM SAPMZBC400_00_A.
+
+TABLES bc400_s_dynconn. " Globale Schnittstellen-Struktur
+DATA ok_code LIKE sy-ucomm.</code></pre>
+
+                <h3>Namensgleichheit</h3>
+                <p>
+                    Im Screen Painter (SE51) müssen die Ein-/Ausgabefelder exakt denselben Namen wie die Komponenten der <code>TABLES</code>-Struktur haben. Das Feld für die Fluggesellschaft heißt also <code>bc400_s_dynconn-carrid</code>.
+                </p>
+                
+                <h3>Automatischer Datentransport</h3>
+                <p>
+                    Das System führt den Datentransport automatisch durch:
+                </p>
+                <ol class="styled-list">
+                    <li>
+                        <strong>PAI (Dynpro -> Programm):</strong> Zu Beginn des PAI (nach der Benutzeraktion) kopiert das System die Inhalte aller Dynpro-Felder in die gleichnamigen Komponenten der globalen <code>TABLES</code>-Struktur im ABAP-Programm. Das PAI-Modul kann dann mit diesen Werten arbeiten (z.B. Daten von der Datenbank lesen).
+                    </li>
+                    <li>
+                        <strong>PBO (Programm -> Dynpro):</strong> Am Ende des PBO (bevor das Bild angezeigt wird) kopiert das System die Inhalte der <code>TABLES</code>-Struktur zurück in die gleichnamigen Dynpro-Felder. Ein PBO-Modul muss also nur die <code>TABLES</code>-Struktur füllen, um die Daten auf dem Schirm anzuzeigen.
+                    </li>
+                </ol>
+            </section>
+        </main>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/layout.js" defer></script>
+    <script src="../js/progress.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Dynpro ABAP (BC400)</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+    <div id="header-placeholder"></div>
+
+    <nav id="main-navigation">
+        <div id="navigation-placeholder"></div>
+    </nav>
+
+    <div class="page-wrapper">
+        <aside class="sidebar">
+            <nav class="sidebar-navigation">
+                <h3 class="sidebar-title">Kapitelübersicht</h3>
+                <ul>
+                    <li><a href="#mvc">Das MVC-Prinzip</a></li>
+                    <li><a href="#komponenten">Web Dynpro Komponenten</a></li>
+                    <li><a href="#context-binding">Context &amp; Datenbindung</a></li>
+                    <li><a href="#navigation">Navigation (Plugs)</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <h1>Web Dynpro ABAP (Kap. 10)</h1>
+            <p>
+                Web Dynpro ABAP ist ein Framework von SAP zur Erstellung von webbasierten Benutzeroberflächen. Im Gegensatz zur klassischen Dynpro-Programmierung folgt es strikt dem **Model-View-Controller (MVC)**-Architekturmodell, um eine klare Trennung von Anwendungslogik, Datenhaltung und Oberflächen-Layout zu gewährleisten.
+            </p>
+
+            <section id="mvc" class="content-section">
+                <h2>Das Model-View-Controller (MVC)-Prinzip</h2>
+                <p>
+                    Das MVC-Modell ist das Fundament von Web Dynpro und teilt die Anwendung in drei Bereiche:
+                </p>
+                <ul class="styled-list">
+                    <li>
+                        <strong>Model:</strong> Repräsentiert die Business-Logik und den Datenzugriff (z.B. ein Funktionsbaustein oder eine Klasse, die Daten von der Datenbank liest).
+                    </li>
+                    <li>
+                        <strong>View:</strong> Die Benutzeroberfläche, die dem Benutzer angezeigt wird (z.B. ein Formular mit Eingabefeldern und einer Tabelle).
+                    </li>
+                    <li>
+                        <strong>Controller:</strong> Dient als Vermittler zwischen Model und View. Er verarbeitet Benutzereingaben, ruft die Model-Logik auf und stellt der View die Daten zur Anzeige bereit.
+                    </li>
+                </ul>
+            </section>
+
+            <section id="komponenten" class="content-section">
+                <h2>Web Dynpro Komponenten</h2>
+                <p>
+                    Eine Web-Dynpro-Anwendung besteht aus wiederverwendbaren Einheiten, den sogenannten **Web-Dynpro-Komponenten**. Eine Komponente bündelt alle für einen Anwendungsbaustein nötigen Teile:
+                </p>
+                <ul class="styled-list">
+                    <li>
+                        <strong>Component-Controller:</strong> Der "Haupt-Controller" der Komponente. Er ist oft für die Datenbeschaffung (Aufruf des Models) und die globale Datenhaltung zuständig.
+                    </li>
+                    <li>
+                        <strong>Views:</strong> Jede Komponente enthält eine oder mehrere Views, die das UI-Layout definieren (z.B. eine <code>INPUT_VIEW</code> und eine <code>OUTPUT_VIEW</code>). Jede View hat ihren eigenen **View-Controller** für UI-spezifische Logik (z.B. das Behandeln eines Button-Klicks).
+                    </li>
+                    <li>
+                        <strong>Windows:</strong> Ein Window bettet Views ein und definiert die sichtbare Oberfläche einer Anwendung. Ein Window enthält typischerweise die Navigationsverbindungen zwischen den Views.
+                    </li>
+                    <li>
+                        <strong>Anwendung (Application):</strong> Ein kleines Objekt, das eine Web-Dynpro-Komponente über ein bestimmtes Window und eine URL im Browser startbar macht.
+                    </li>
+                </ul>
+            </section>
+            
+            <section id="context-binding" class="content-section">
+                <h2>Context &amp; Datenbindung (Kap. 10, Lektion 3)</h2>
+                <p>
+                    Web Dynpro verwendet keine globalen Variablen wie klassische Dynpros. Der Datenaustausch erfolgt über den **Context**.
+                </p>
+                <p>
+                    Jeder Controller (View-Controller, Component-Controller) besitzt einen eigenen Context. Der Context ist ein hierarchischer Speicherbereich für Daten (Variablen, Strukturen, interne Tabellen), die in der Anwendung benötigt werden.
+                </p>
+                
+                <h3>Context-Mapping</h3>
+                <p>
+                    Damit Daten zwischen Controllern fließen können (z.B. vom Component-Controller zur View), wird ein **Context-Mapping** eingerichtet. Dabei werden Knoten aus einem View-Context mit Knoten aus dem Component-Context "gemappt" (verbunden).
+                </p>
+                <p>
+                    Der typische Datenfluss (z.B. beim Lesen von Flugdaten) ist:
+                </p>
+                <ol class="styled-list">
+                    <li>Eine Aktion in der <code>INPUT_VIEW</code> (z.B. Button-Klick) liest Daten aus den Eingabefeldern.</li>
+                    <li>Diese Daten sind per "Datenbindung" an den View-Context gebunden.</li>
+                    <li>Per "Context-Mapping" sind sie auch im Component-Controller-Context verfügbar.</li>
+                    <li>Die Aktions-Behandlermethode ruft die Business-Logik (Service-Methode) im Component-Controller auf.</li>
+                    <li>Diese Methode ruft das Model (z.B. Funktionsbaustein) auf, um die Daten zu holen.</li>
+                    <li>Das Ergebnis wird in einen "Output-Knoten" im Component-Controller-Context geschrieben.</li>
+                    <li>Dank Mapping ist dieses Ergebnis sofort auch im Context der <code>OUTPUT_VIEW</code> verfügbar und wird dort per Datenbindung in den Ausgabefeldern angezeigt.</li>
+                </ol>
+
+                <h3>Datenbindung (Data Binding)</h3>
+                <p>
+                    Im View-Layout werden die UI-Elemente (z.B. ein <code>InputField</code>) direkt an Attribute im View-Context **gebunden** (Datenbindung). Ändert sich der Wert im Context, ändert sich die Anzeige im UI-Element automatisch – und umgekehrt.
+                </p>
+            </section>
+
+            <section id="navigation" class="content-section">
+                <h2>Navigation (Plugs) (Kap. 10, Lektion 2)</h2>
+                <p>
+                    Die Navigation zwischen Views (z.B. von der Eingabe- zur Ausgabe-View) wird in Web Dynpro über **Plugs** gesteuert.
+                </p>
+                <ul class="styled-list">
+                    <li>
+                        <strong>Outbound-Plug:</strong> Ein "Ausgang" einer View. Wenn eine View verlassen werden soll, "feuert" sie einen Outbound-Plug.
+                    </li>
+                    <li>
+                        <strong>Inbound-Plug:</strong> Ein "Eingang" einer View. Er dient als Ziel für die Navigation.
+                    </li>
+                    <li>
+                        <strong>Navigationslink:</strong> Im Window-Editor wird ein Navigationslink grafisch vom Outbound-Plug der Quell-View zum Inbound-Plug der Ziel-View gezogen.
+                    </li>
+                </ul>
+                <p>
+                    Um z.B. bei einem Button-Klick (Aktion 'GO') zur nächsten View zu navigieren, wird in der Behandlermethode der Aktion lediglich der zugehörige Outbound-Plug (z.B. <code>OUT_GO_PLG</code>) aufgerufen:
+                </p>
+                <pre><code>METHOD onactiongo.
+  " Diese Methode feuert den Plug 'OUT_GO_PLG'
+  wd_this->fire_out_go_plg( ).
+ENDMETHOD.</code></pre>
+                <p>
+                    Die Web-Dynpro-Laufzeitumgebung folgt dann automatisch dem im Window definierten Navigationslink zum Inbound-Plug der Ziel-View.
+                </p>
+            </section>
+
+        </main>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/layout.js" defer></script>
+    <script src="../js/progress.js" defer></script>
+</body>
+</html>

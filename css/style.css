@@ -1,0 +1,562 @@
+/* ================================================
+THEME: "ABAP LEARNER" (Purple-Blue)
+Oriented on previous CSS, pruned to what's used, with new palette.
+================================================
+*/
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Inter:wght@400;500&display=swap');
+
+/* Palette (CSS variables) */
+:root {
+  /* Base palette */
+  --grape: #6f2dbd;
+  --royal-purple: #8b48c5;
+  --amethyst: #a663cc;
+  --wisteria: #b298dc;
+  --periwinkle: #b5b4e4;
+  --columbia-blue: #b8d0eb;
+  --celeste: #b9faf8;
+
+  /* Surface + text */
+  --background-dark: #0a0c10;
+  --background-card: #12161d;
+  --border-color: #2a303a;
+  --text-primary: #e6edf3;
+  --text-headings: #ffffff;
+
+  /* Accents mapped from palette */
+  --accent-primary: var(--grape);
+  --accent-secondary: var(--celeste);
+  --accent-gradient: linear-gradient(90deg, var(--grape), var(--royal-purple), var(--amethyst), var(--celeste), var(--amethyst), var(--royal-purple), var(--grape));
+}
+
+/* Base */
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background-dark);
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* Layout */
+.page-wrapper {
+  display: flex;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.sidebar {
+  flex: 0 0 240px;
+  position: sticky;
+  top: 80px;
+  bottom: 0; /* NEU: Sorgt dafür, dass das Element unten nicht überläuft */
+  align-self: flex-start;
+  height: calc(100vh - 80px); /* Fallback für ältere Browser */
+  height: calc(100dvh - 80px); /* Bevorzugte Einheit für moderne Browser */
+  padding: 2em 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-container {
+  padding: 0 1em 1.5em;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1.5em;
+}
+
+#lexicon-search {
+  width: 100%;
+  padding: 0.8em;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: var(--background-dark);
+  color: var(--text-primary);
+  font-size: 1em;
+  box-sizing: border-box;
+}
+
+#lexicon-search:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 8px var(--accent-primary);
+}
+
+.sidebar-navigation {
+  flex-grow: 1;
+  overflow-y: auto; /* DIES ist die korrekte Stelle für den Scrollbalken */
+  padding-bottom: 2em; /* NEU: Abstand am Ende der scrollbaren Liste */
+}
+
+.sidebar-navigation h3 {
+  font-family: 'Chakra Petch', sans-serif;
+  color: var(--accent-secondary);
+  font-size: 1.4em;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--border-color);
+  padding-left: 1rem;
+}
+
+.sidebar-navigation ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-navigation li a {
+  display: block;
+  padding: 0.8em 1em;
+  color: var(--text-primary);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.2s, color 0.2s, border-left-color 0.2s;
+  border-left: 3px solid transparent;
+}
+
+.sidebar-navigation li a:hover,
+.sidebar-navigation li a:focus-visible,
+.sidebar-navigation li a.active {
+  background-color: var(--background-card);
+  color: var(--text-headings);
+  border-left: 3px solid var(--accent-primary);
+}
+
+.main-content {
+  max-width: 1000px;
+  margin: 3em auto;
+  padding: 0 1.5em;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+/* Progress bar (top) */
+#progress-container {
+  width: 100%;
+  background-color: var(--border-color);
+  height: 6px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+}
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--accent-gradient);
+  transition: width 0.3s ease-out;
+  box-shadow: 0 0 10px var(--accent-secondary);
+}
+
+/* Header */
+.page-header {
+  padding: 2.5em 1em;
+  text-align: center;
+  background-color: var(--background-dark);
+  border-bottom: 1px solid var(--border-color);
+}
+.page-header h1 {
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 3em;
+  color: var(--text-headings);
+  margin: 0;
+  letter-spacing: 1px;
+}
+.page-header p {
+  font-size: 1.1em;
+  color: var(--text-primary);
+  opacity: 0.7;
+  margin-top: 0.5em;
+}
+
+/* Main navigation (sticky) */
+#main-navigation {
+  background-color: rgba(18, 22, 29, 0.85);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  position: sticky;
+  top: 6px;
+  z-index: 1000;
+  border-bottom: 1px solid var(--border-color);
+}
+#main-navigation ul {
+  list-style: none;
+  margin: 0;
+  padding: 0.5em 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+#main-navigation ul li a {
+  font-family: 'Chakra Petch', sans-serif;
+  font-weight: 600;
+  display: block;
+  padding: 0.8em 1.2em;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+  border-radius: 6px;
+  margin: 0 0.5em;
+  position: relative;
+}
+#main-navigation ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--accent-gradient);
+  transition: width 0.3s ease;
+}
+#main-navigation ul li a:hover,
+#main-navigation ul li a:focus-visible,
+#main-navigation ul li a.active {
+  color: var(--text-headings);
+  text-shadow: 0 0 5px var(--accent-secondary);
+}
+#main-navigation ul li a:hover::after,
+#main-navigation ul li a:focus-visible::after,
+#main-navigation ul li a.active::after {
+  width: 80%;
+}
+
+.nav-search-item {
+    margin-left: 1.5em;
+}
+
+#global-search-form {
+    display: flex;
+    align-items: center;
+}
+
+#global-search {
+    padding: 0.7em 1em;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    background-color: var(--background-dark);
+    color: var(--text-primary);
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    width: 180px;
+}
+
+#global-search:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 8px var(--accent-primary);
+    width: 220px;
+}
+
+
+/* Sections */
+.content-section {
+  background-color: var(--background-card);
+  border: 1px solid var(--border-color);
+  padding: 2.5em;
+  margin-bottom: 2.5em;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+}
+.content-section:hover { border-color: var(--royal-purple); }
+.content-section h2 {
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 2.2em;
+  color: var(--text-headings);
+  margin-top: 0;
+  margin-bottom: 1em;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--border-color);
+  letter-spacing: 0.5px;
+}
+.content-section h3 {
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 1.5em;
+  color: var(--accent-secondary);
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+/* Lists */
+strong, b { color: var(--accent-primary); font-weight: 600; }
+
+.styled-list { list-style: none; padding: 0; }
+.styled-list li {
+  margin-bottom: 1em;
+  padding-left: 2em;
+  position: relative;
+}
+.styled-list li::before {
+  content: '»';
+  position: absolute;
+  left: 0;
+  top: -2px;
+  color: var(--accent-primary);
+  font-weight: bold;
+  font-size: 1.5em;
+  transition: transform 0.2s ease;
+}
+.styled-list li:hover::before { transform: translateX(5px); }
+
+/* Ordered variant */
+ol.styled-list { counter-reset: styled-counter; }
+ol.styled-list li { counter-increment: styled-counter; }
+ol.styled-list li::before {
+  content: counter(styled-counter);
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 1.1em;
+  width: 25px; height: 25px;
+  text-align: center;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  color: var(--background-card);
+  top: 0; left: -0.5em;
+}
+ol.styled-list li:hover::before { transform: none; }
+/* ================================================
+   TABLE STYLES
+   ================================================ */
+.content-section table {
+    width: 100%;
+    margin-top: 1.5em;
+    margin-bottom: 2.5em;
+    border-collapse: collapse;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden; /* Wichtig für abgerundete Ecken */
+}
+
+.content-section th,
+.content-section td {
+    padding: 1em 1.2em;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.content-section thead th {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 1.2em;
+    color: var(--accent-secondary);
+    background-color: var(--background-dark);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.content-section tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.content-section tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.content-section tbody tr:hover {
+    background-color: rgba(185, 250, 248, 0.04); /* Celeste tint */
+}
+
+/* Spezieller Stil für die erste Spalte (Standardtypen) */
+.content-section tbody td:first-child {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: var(--accent-primary);
+    background-color: var(--background-dark);
+    font-size: 1.05em;
+}
+
+/* Titel für die Tabellen */
+.content-section h4 {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 1.3em;
+    color: var(--accent-secondary);
+    margin-top: 2.5em;
+    margin-bottom: 0.5em;
+}
+/* Quiz */
+.quiz-section {
+  background-color: var(--background-card);
+  border: 1px solid var(--border-color);
+  padding: 2.5em;
+  margin-bottom: 2.5em;
+  border-radius: 8px;
+}
+.quiz-settings {
+  background-color: var(--background-dark);
+  padding: 1.5em;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 2em;
+}
+.setting-option { display: flex; align-items: center; gap: 0.6em; margin-bottom: 1em; }
+.setting-option:last-child { margin-bottom: 0; }
+.setting-option label { cursor: pointer; }
+.setting-option input[type="checkbox"] {
+  transform: scale(1.2);
+  accent-color: var(--accent-primary);
+  cursor: pointer;
+}
+
+#chapter-selection {
+  margin-top: 1.5em;
+  padding-top: 1.5em;
+  border-top: 1px solid var(--border-color);
+}
+#chapter-selection h4 {
+  margin: 0 0 1em 0;
+  font-family: 'Chakra Petch', sans-serif;
+  color: var(--accent-secondary);
+}
+#chapter-options-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.8em;
+  margin-top: 1em;
+  padding-left: 1.2em;
+}
+.deselect-btn {
+  margin-left: 1em;
+  color: var(--accent-secondary);
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 0.9em;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+.deselect-btn:hover { opacity: 1; }
+
+#quiz-buttons { margin-top: 2em; }
+#quiz-buttons button,
+#quiz-end-screen button,
+#start-quiz-btn {
+  font-family: 'Chakra Petch', sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 0.8em 1.8em;
+  border: 2px solid transparent;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-size: 200% auto;
+  will-change: transform;
+  margin-right: 1em;
+}
+
+#check-answer-btn, #restart-quiz-btn, #repeat-incorrect-btn, #start-quiz-btn {
+  background-image: var(--accent-gradient);
+  background-color: var(--grape); /* Fallback-Farbe gegen "falsche Ecken" */
+  color: #ffffff;
+}
+#check-answer-btn:hover, #restart-quiz-btn:hover, #repeat-incorrect-btn:hover, #start-quiz-btn:hover,
+#check-answer-btn:focus-visible, #restart-quiz-btn:focus-visible, #repeat-incorrect-btn:focus-visible, #start-quiz-btn:focus-visible {
+  background-position: right center;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(139, 72, 197, 0.35); /* royal-purple glow */
+}
+
+#next-question-btn {
+  background-color: var(--border-color);
+  color: var(--text-primary);
+}
+#next-question-btn:hover,
+#next-question-btn:focus-visible {
+  background-color: #3d4450;
+  color: #ffffff;
+}
+
+.answer-option {
+  margin-bottom: 1em;
+  padding: 1.2em;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.answer-option:hover,
+.answer-option:focus-within {
+  border-color: var(--accent-secondary);
+  background-color: rgba(185, 250, 248, 0.06); /* celeste tint */
+}
+.answer-option input[type="checkbox"] {
+  margin-right: 12px;
+  transform: scale(1.2);
+  accent-color: var(--accent-primary);
+}
+.answer-option label {
+  cursor: pointer;
+  flex-grow: 1;
+  margin: 0;
+}
+#explanation-text {
+  background-color: var(--background-dark);
+  border-left: 3px solid var(--accent-primary);
+  padding: 1em 1.5em;
+  margin-top: 1.5em;
+  border-radius: 4px;
+}
+
+/* Sub-item list style */
+.list-sub-item {
+  padding-left: 1em;
+  margin-top: 0.5em;
+  font-size: 0.95em;
+  opacity: 0.9;
+}
+
+/* Lexikon-spezifische Stile */
+.lexicon-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.lexicon-entry {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+.lexicon-entry dt {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent-secondary);
+    margin-bottom: 0.5rem;
+}
+.lexicon-entry dd {
+    margin-left: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+.lexicon-entry code {
+    background-color: var(--background-dark);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2.5em 0;
+  margin-top: 4em;
+  background-color: var(--background-card);
+  border-top: 1px solid var(--border-color);
+  color: var(--text-primary);
+  opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .sidebar { display: none; }
+}
+@media (max-width: 768px) {
+  .page-header h1 { font-size: 2.2em; }
+  .content-section { padding: 1.5em; }
+  #main-navigation ul { flex-direction: column; align-items: center; padding: 0.2em 0; }
+  #main-navigation ul li a { width: 80%; text-align: center; }
+}
+@media (max-width: 480px) {
+  #chapter-options-container { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+}

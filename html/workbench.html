@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABAP Workbench (WI 2541)</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+    <div id="header-placeholder"></div>
+
+    <nav id="main-navigation">
+        <div id="navigation-placeholder"></div>
+    </nav>
+
+    <div class="page-wrapper">
+        <aside class="sidebar">
+            <nav class="sidebar-navigation">
+                <h3 class="sidebar-title">Kapitelübersicht</h3>
+                <ul>
+                    <li><a href="#grundlagen">Grundlagen der Programmierung</a></li>
+                    <li><a href="#quelltext-debuggen">Quelltext & Debugging</a></li>
+                    <li><a href="#ablaufsteuerung">Ablaufsteuerungsstrukturen</a></li>
+                    <li><a href="#fehlerbehandlung">Laufzeitfehler & Fehlerbehandlung</a></li>
+                    <li><a href="#programmiertechniken">Zusätzliche Programmiertechniken</a></li>
+                    <li><a href="#transaktionscodes">Transaktionscodes erstellen</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section id="grundlagen" class="content-section">
+                <h2>Grundlagen der ABAP-Programmierung</h2>
+                <h3>Entwickeln eines einfachen ABAP-Programms</h3>
+                <p>Ein ABAP-Programm wird im ABAP Editor (z.B. Transaktion SE38 oder SE80) angelegt. Jedes Programm benötigt Attribute, wie den Typ (z.B. "Ausführbares Programm") und einen Titel. Das erste Schlüsselwort in einem Report ist oft REPORT. Die Ausgabe erfolgt klassisch mit WRITE. Jede ABAP-Anweisung endet mit einem Punkt. Wichtige Funktionen sind Sichern ($STRG+S$), Syntax prüfen ($STRG+F2$) und Aktivieren ($STRG+F3$).</p>
+                <h3>Einführung in die ABAP-Syntax</h3>
+                <p>ABAP ist eine plattformunabhängige, aufwärtskompatible Sprache, die SQL-Zugriffe und Objektorientierung unterstützt und mehrsprachige Anwendungen ermöglicht. Anweisungen: Beginnen mit einem Schlüsselwort und enden immer mit einem Punkt. Wörter werden durch mindestens ein Leerzeichen getrennt. Kettensätze: Fassen Anweisungen mit gleichem Schlüsselwort zusammen. Sie beginnen mit einem Doppelpunkt (:) nach dem Schlüsselwort, und die einzelnen Anweisungsteile werden durch Komma (,) getrennt. Kommentare: Ein Stern (*) am Zeilenanfang kommentiert die ganze Zeile. Ein Anführungszeichen (") kommentiert den Rest der Zeile. Hilfe: Die F1-Taste auf einem Schlüsselwort öffnet die ABAP-Schlüsselwortdokumentation.</p>
+                <h3>Implementieren von einfachen Dialogen</h3>
+                <p>Um Benutzereingaben zu ermöglichen, wird ein Selektionsbild verwendet. Das Schlüsselwort PARAMETERS deklariert eine Variable für die Dateneingabe. Diese Variable (z.B. pa_name) fungiert als Datencontainer für die Eingabe des Benutzers, dessen Inhalt im Programm für die Verarbeitung (z.B. WRITE pa_name) genutzt werden kann.</p>
+                <h3>Anpassen des ABAP Editors</h3>
+                <p>Es gibt den klassischen und den neuen ABAP Editor. Der neue Editor bietet Syntax-Hervorhebung (unterschiedliche Farben), Zeilennummern, Code-Vorlagen und Code-Hinweise. Der Pretty Printer formatiert den Quelltext automatisch, z.B. Einrückung und Groß-/Kleinschreibung.</p>
+            </section>
+            <section id="quelltext-debuggen" class="content-section">
+                <h2>Quelltext schreiben und Debuggen in ABAP</h2>
+                <h3>Definieren von einfachen Variablen</h3>
+                <p>Variablen werden benötigt, um Daten im Programm zu speichern. ABAP unterscheidet elementare Standarddatentypen und globale Typen aus dem ABAP Dictionary. Standardtypen: Wichtige Typen sind I (Ganzzahl), P (Gepackte Zahl, für Dezimalzahlen), STRING (Zeichenkette variabel), C (Zeichenkette fest), D (Datum) und T (Uhrzeit). Dictionary-Typen: Man kann sich auf bestehende Typen aus dem ABAP Dictionary beziehen, z.B. TYPE MARA-MATNR. Deklaration: Erfolgt mit DATA. Mit LIKE kann man sich auf eine andere Variable beziehen. Literale: Feste Werte im Code. Textliterale stehen in Hochkommata (z.B. 'Hello World'), Zahlenliterale nicht (z.B. 123). Konstanten: Variablen mit festem Wert, die nicht geändert werden können. Deklaration: CONSTANTS ... VALUE ...</p>
+                <h3>Definieren von Textsymbolen</h3>
+                <p>Um Programme mehrsprachig zu gestalten, werden Textliterale vermieden. Stattdessen verwendet man Textsymbole. Im Code wird ein Textsymbol über eine ID (z.B. 'hel') referenziert: WRITE: 'Hello' (hel), pa_name.. Die Übersetzungen (DE, EN, FR etc.) werden in den Textelementen des Programms gepflegt.</p>
+                <h3>Durchführen von arithmetischen Operationen</h3>
+                <p>Variablen haben je nach Typ einen Initialwert (z.B. Typ I hat 0, STRING ist leer). Werte können zugewiesen werden (z.B. gv_result = pa_num1 + pa_num2.). Die gängigen Operatoren sind + (Addition), - (Subtraktion), * (Multiplikation) und / (Division). Alternativ gibt es Schlüsselwörter wie ADD 1 TO gv_result..</p>
+                <h3>Verwenden von Systemvariablen</h3>
+                <p>Das System stellt vordefinierte Variablen (Systemfelder) bereit. Häufig genutzt werden SY-DATUM (Aktuelles Datum), SY-UZEIT (Aktuelle Uhrzeit) und SY-UNAME (Benutzer-ID des aktuellen Benutzers).</p>
+                <h3>Debuggen von Programmen</h3>
+                <p>Der ABAP Debugger ist das Werkzeug zur Fehleranalyse. Man startet ihn, indem man /h in das Befehlsfeld eingibt, oder indem man Breakpoints im Code setzt. Im Debugger kann man den Wert von Variablen prüfen (per Doppelklick) und den Code schrittweise ausführen (z.B. Einzelschritt mit F5). Watchpoints können gesetzt werden, um das Programm anzuhalten, sobald sich der Wert einer bestimmten Variable ändert.</p>
+                <h3>Anlegen von ABAP-Listen</h3>
+                <p>Klassische ABAP-Listen sind die Standardausgabe von Reports (erzeugt durch WRITE). Sie bieten Standardfunktionen wie Drucken, Suchen und Sichern. Die Ausgabe kann formatiert werden, z.B. mit Farben (WRITE ... COLOR COL_POSITIVE.) oder Ikonen (WRITE ... AS ICON.). Listen- und Spaltenüberschriften können über die Textelemente gepflegt werden.</p>
+                <h3>Zeichenkettenverarbeitung</h3>
+                <p>ABAP bietet Befehle zur Manipulation von Zeichenketten: Verketten: CONCATENATE pa_fname pa_lname INTO gv_full_name SEPARATED BY space. Suchen: FIND 'Smith' IN pa_name.. Das Ergebnis (Erfolg/Misserfolg) wird in SY-SUBRC gespeichert. Teilen: SPLIT gv_text AT ' ' INTO gv_fname gv_lname.</p>
+            </section>
+            <section id="ablaufsteuerung" class="content-section">
+                <h2>Ablaufsteuerungsstrukturen in ABAP</h2>
+                <h3>Implementieren von Bedingungslogik</h3>
+                <p>Bedingungslogik (bedingte Verzweigungen) steuert, ob ein Codeblock ausgeführt wird. Struktur: Die Anweisung beginnt mit IF und endet mit ENDIF.. Alternativen: Mit ELSE wird ein alternativer Block ausgeführt, falls die IF-Bedingung nicht zutrifft. Mit ELSEIF können weitere Bedingungen geprüft werden. Vergleichsoperatoren: = (EQ), <> (NE), > (GT), < (LT), >= (GE), <= (LE). Boolesche Operatoren: Bedingungen können mit AND (alle müssen wahr sein) und OR (mindestens eine muss wahr sein) verknüpft werden. NOT negiert eine Bedingung.</p>
+                <h3>Implementieren von Schleifen</h3>
+                <p>Schleifen werden für sich wiederholende Logik verwendet. Der aktuelle Schleifendurchlauf wird in der Systemvariablen SY-INDEX gezählt. Endlosschleife (mit Abbruch): DO. ... IF <condition>. EXIT. ENDIF. ... ENDDO. Zählschleife: DO n TIMES. ... ENDDO. Führt den Block n-mal aus. Bedingte Schleife: WHILE <condition>. ... ENDWHILE. Prüft die Bedingung vor jedem Durchlauf.</p>
+            </section>
+            <section id="fehlerbehandlung" class="content-section">
+                <h2>Laufzeitfehler und Fehlerbehandlung</h2>
+                <h3>Analysieren von Laufzeitfehlern</h3>
+                <p>Auch syntaktisch korrekte Programme können zu Laufzeitfehlern führen, z.B. bei einer Division durch Null. Dies führt zu einem ABAP-Kurzdump (analysierbar in Transaktion ST22). Der Dump zeigt den Fehlernamen (z.B. BCD_ZERODIVIDE) und den Quelltextauszug an der Fehlerstelle. Solche Fehler können durch präventive Bedingungslogik (z.B. IF pa_mths <> 0.) vermieden werden.</p>
+                <h3>Implementieren von Fehlerbehandlung</h3>
+                <p>Statt das Programm abstürzen zu lassen, sollte eine kontrollierte Fehlerbehandlung erfolgen, oft durch das Senden von Nachrichten. Nachrichtentypen: Wichtige Typen sind I (Information), das Programm stoppt und zeigt ein Dialogfenster, und E (Fehler), das die Verarbeitung stoppt und die Nachricht in der Statuszeile anzeigt. Nachrichtenklassen: Nachrichten werden in Nachrichtenklassen (Transaktion SE91) verwaltet. Aufruf: MESSAGE i001(bc100_msg).. Um Variablen in den Text zu integrieren (Platzhalter &1), wird der Zusatz WITH verwendet: MESSAGE i001(bc100_msg) WITH pa_hols..</p>
+            </section>
+            <section id="programmiertechniken" class="content-section">
+                <h2>Zusätzliche ABAP-Programmiertechniken</h2>
+                <h3>Abrufen von Daten aus der Datenbank</h3>
+                <p>Der Zugriff auf Datenbanktabellen (definiert im ABAP Dictionary, SE11) erfolgt über die Datenbankschnittstelle mittels Open SQL. SELECT-Anweisung: Der zentrale Befehl zum Lesen von Daten. Einzelnen Satz lesen: SELECT SINGLE ... FROM ... INTO ... WHERE .... Die Klauseln beantworten: Welche Spalten? (SELECT), Welche Tabelle? (FROM), Wohin? (INTO) und Welche Zeilen? (WHERE). Erfolgsprüfung: Nach einem SELECT-Befehl sollte SY-SUBRC geprüft werden. Wenn SY-SUBRC = 0, war der Zugriff erfolgreich.</p>
+                <h3>Beschreiben der Modularisierung in ABAP</h3>
+                <p>Modularisierung dient der Wiederverwendung von Quelltext. Statt denselben Codeblock (Quelltextblock A) in viele Programme zu kopieren, wird er zentral gekapselt und aufgerufen. Der Datenaustausch zwischen Aufrufer und aufgerufenem Block darf nicht über globale Variablen erfolgen, sondern muss über eine definierte Schnittstelle geschehen.</p>
+                <h3>Verwenden von Funktionsbausteinen</h3>
+                <p>Funktionsbausteine (Transaktion SE37) sind eine wichtige Technik zur Modularisierung. Sie besitzen eine feste Schnittstelle: Importparameter: Daten, die an den Baustein übergeben werden (Eingabe). Exportparameter: Daten, die vom Baustein zurückgegeben werden (Ausgabe). Changing-Parameter: Werden übergeben und verändert zurückgegeben. Ausnahmen (Exceptions): Dienen der Fehlerbehandlung. Tritt eine Ausnahme auf, wird SY-SUBRC auf einen Wert ungleich 0 gesetzt. Der Aufruf im Programm erfolgt mit CALL FUNCTION 'FUNKTIONSBAUSTEIN_NAME' .... Im ABAP Editor kann die "Pattern"-Drucktaste (oder $STRG+F6$) verwendet werden, um eine Vorlage für den Aufruf zu generieren.</p>
+            </section>
+            <section id="transaktionscodes" class="content-section">
+                <h2>Transaktionscodes – Das Navigationssystem von SAP</h2>
+
+<p>Stell dir vor, SAP ist eine riesige Stadt voller nützlicher Orte: Banken, Werkstätten, Lagerhäuser und Büros. Wie findest du den schnellsten Weg zu dem Ort, den du brauchst? In SAP benutzt du dafür <strong>Transaktionscodes</strong> (kurz <strong>T-Codes</strong>). Sie sind die Adressen oder Kurzbefehle, die dich direkt zur gewünschten Funktion bringen.</p>
+
+<h3>Was ist ein Transaktionscode?</h3>
+
+<p>Ein Transaktionscode ist eine Zeichenfolge (z. B. <code>SE80</code> oder <code>VA01`</code>), die eine bestimmte Funktion oder ein Programm in SAP startet. Anstatt dich durch unzählige Menüs zu klicken, gibst du einfach den T-Code in das Befehlsfeld ein und landest sofort am Ziel.</p>
+
+<p>Für Entwickler sind sie doppelt wichtig:
+<ol>
+  <li><strong>Navigation:</strong> Du springst blitzschnell zwischen Werkzeugen wie dem ABAP Editor (<code>SE38</code>), dem Data Dictionary (<code>SE11</code>) oder dem Function Builder (<code>SE37</code>).</li>
+  <li><strong>Erstellung:</strong> Du machst deine eigenen ABAP-Programme für Endanwender über einen einfachen T-Code zugänglich.</li>
+</ol></p>
+
+<p>Die meisten T-Codes folgen einem Muster. Eigene, von Kunden erstellte T-Codes beginnen immer mit <strong>Z</strong> oder <strong>Y</strong> (z. B. <code>Z_MEIN_REPORT</code>). So wird sichergestellt, dass sie nicht mit Standard-T-Codes von SAP kollidieren.</p>
+
+<h3>Wie benutze ich einen T-Code?</h3>
+
+<p>In der SAP-GUI findest du oben links das <strong>Befehlsfeld</strong>. Hier gibst du die T-Codes ein.</p>
+
+<p>Es gibt ein paar einfache, aber extrem nützliche Präfixe, die du kennen solltest:</p>
+
+<ul>
+  <li><strong>Direkter Sprung:</strong> Gib einfach den T-Code ein (z. B. <code>SE80</code>) und drücke Enter. Du springst zur neuen Transaktion.</li>
+  <li><code>/n[T-Code]</code>: <strong>Beendet</strong> die aktuelle Transaktion und startet die neue. Beispiel: Du bist in <code>SE11</code> und gibst <code>/nSE80</code> ein. Das <code>SE11</code>-Fenster wird geschlossen und <code>SE80</code> wird im selben Fenster geöffnet. Das ist der sicherste und häufigste Weg.</li>
+  <li><code>/o[T-Code]</code>: <strong>Öffnet</strong> die neue Transaktion in einem <strong>zusätzlichen Fenster</strong> (einer neuen Session). Beispiel: <code>/oVA03</code>. Deine aktuelle Arbeit bleibt unberührt und ein neues Fenster zur Anzeige eines Kundenauftrags öffnet sich.</li>
+  <li><code>/i</code>: Schließt das aktuelle Fenster (Session).</li>
+  <li><code>/nex</code>: Meldet dich vom System ab (beendet alle deine Sessions mit einer Sicherheitsabfrage).</li>
+</ul>
+
+<h3>Kurzanleitung: Deinen ersten Transaktionscode anlegen</h3>
+
+<p>Angenommen, du hast einen einfachen Report geschrieben und möchtest ihn über einen T-Code aufrufbar machen.</p>
+
+<p><strong>Voraussetzung:</strong> Ein lauffähiges ABAP-Programm. Erstelle falls nötig schnell ein Testprogramm in <code>SE38</code> mit dem Namen <code>Z_TEST_REPORT</code> und folgendem Inhalt:</p>
+
+<pre><code class="language-abap" name="Z_TEST_REPORT.abap">REPORT Z_TEST_REPORT.
+
+WRITE: / 'Hallo Welt! Mein erster T-Code funktioniert.'.
+</code></pre>
+
+<p><strong>Anleitung in 5 Schritten:</strong></p>
+
+<ol>
+  <li><strong>Starte die T-Code-Verwaltung:</strong> Gehe zur Transaktion <code>SE93</code>.</li>
+  <li><strong>Namen vergeben:</strong> Gib im Feld "Transaktion" den Namen deines neuen T-Codes ein (z. B. <code>Z_HALLO_WELT</code>) und klicke auf "Anlegen".</li>
+  <li><strong>Kurztext &amp; Typ wählen:</strong>
+    <ul>
+      <li>Gib einen aussagekräftigen <strong>Kurztext</strong> ein, z. B. "Mein erster Test-Report".</li>
+      <li>Wähle als Startobjekt die Option <strong>"Programm und Selektionsbild (Reporttransaktion)"</strong>. Dies ist der häufigste Typ für einfache Reports.</li>
+    </ul>
+  </li>
+  <li><strong>Programm zuweisen:</strong>
+    <ul>
+      <li>Gib im Feld "Programm" den Namen deines ABAP-Reports ein (<code>Z_TEST_REPORT</code>).</li>
+      <li>Die übrigen Einstellungen (z. B. GUI-Unterstützung) kannst du für den Anfang auf den Standardwerten belassen.</li>
+    </ul>
+  </li>
+  <li><strong>Speichern und Testen:</strong>
+    <ul>
+      <li>Klicke auf "Speichern". Das System fragt dich nach einem Paket. Für einen einfachen Test wähle <strong>"Lokales Objekt"</strong> (Button) oder gib <code>$TMP</code> ein. Damit wird der T-Code nicht in andere Systeme transportiert.</li>
+      <li><strong>Fertig!</strong> Gib nun deinen neuen T-Code <code>/nZ_HALLO_WELT</code> im Befehlsfeld ein. Dein Report sollte sofort ausgeführt werden.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3>Wichtige Regeln und Tipps</h3>
+
+<ul>
+  <li><strong>Kundennamensraum:</strong> Nutze immer <code>Z</code> oder <code>Y</code> für eigene Entwicklungen.</li>
+  <li><strong>Berechtigungen:</strong> Nur weil ein T-Code existiert, kann ihn nicht jeder ausführen. Benutzer benötigen die entsprechende Berechtigung in ihrer Rolle (Objekt <code>S_TCODE</code>).</li>
+  <li><strong>Transportwesen:</strong> T-Codes, die in einem Paket (nicht <code>$TMP</code>) gespeichert werden, sind "Workbench-Objekte". Sie werden über Transportaufträge in Test- und Produktivsysteme verteilt.</li>
+  <li><strong>Arten von T-Codes:</strong> Neben Reporttransaktionen gibt es u. a. <strong>Dialogtransaktionen</strong> (für komplexere Anwendungen mit mehreren Bildern/Dynpros) und <strong>Parametertransaktionen</strong> (die eine andere Transaktion mit vordefinierten Werten aufrufen).</li>
+</ul>
+
+<p><strong>Zusammenfassend lässt sich sagen:</strong> Transaktionscodes sind das Rückgrat der Navigation in SAP. Sie zu verstehen und selbst erstellen zu können, ist ein fundamentaler Schritt für jeden ABAP-Anfänger.</p>
+            </section>
+        </main>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/layout.js" defer></script>
+    <script src="../js/progress.js" defer></script>
+</body>
+</html>

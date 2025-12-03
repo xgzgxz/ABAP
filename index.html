@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Einführung ABAP Workbench (WI 2541)</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+    <div id="header-placeholder"></div>
+
+    <nav id="main-navigation">
+        <div id="navigation-placeholder"></div>
+    </nav>
+
+    <div class="page-wrapper">
+        <aside class="sidebar">
+            <nav class="sidebar-navigation">
+                <h3 class="sidebar-title">Kapitelübersicht</h3>
+                <ul>
+                    <li><a href="#setup">Setup & Systemzugang</a></li>
+                    <li><a href="#grundlagen-architektur">ABAP Grundlagen & Architektur</a></li>
+                    <li><a href="#flugmodell">Das SAP-Flugmodell (Kontext)</a></li>
+                    <li><a href="#entwicklungsumgebung">Entwicklungsumgebung (SE80/ADT)</a></li>
+                    <li><a href="#datentypen-dictionary">Datentypen & Datenwörterbuch</a></li>
+                    <li><a href="#interne-tabellen">Interne Tabellen</a></li>
+                    <li><a href="#modularisierung">Modularisierung in ABAP</a></li>
+                    <li><a href="#open-sql">Open SQL Grundlagen</a></li>
+                    <li><a href="#selektionsbild">Selektionsbild & klassische Listen</a></li>
+                    <li><a href="#alv">ALV (Simple/OO)</a></li>
+                    <li><a href="#debugging">Debugging & Fehlerbehandlung</a></li>
+                    <li><a href="#tcodes">Anhang: Wichtige Transaktionen</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+
+            <section id="setup" class="content-section">
+                <h2>Setup & Systemzugang</h2>
+                <p>
+                    Willkommen zum Kurs "ABAP Workbench"! Bevor wir mit der Entwicklung beginnen, müssen wir unsere Umgebung einrichten und uns am System anmelden. Diese Schritte basieren auf der Einführungspool (Dozent: Thilo Kunz).
+                </p>
+                
+                <h3>1. Softwareinstallation</h3>
+                <p>Stelle sicher, dass die folgende Software installiert ist:</p>
+                <ul class="styled-list">
+                    <li><strong>Java SE Development Kit 21.0.8</strong>
+                        <p class="list-sub-item">Vergiss nicht, die Umgebungsvariablen für den Dateipfad zu setzen (z.B. <code>C:\Program Files\Common Files\Oracle\Java\javapath</code>).</p>
+                    </li>
+                    <li><strong>SAPGUI for Java 8.10 Rev 1</strong>
+                        <p class="list-sub-item">Installation via Kommandozeile: <code>java -jar platingui_810_1-80009304.jar</code>.</p>
+                    </li>
+                </ul>
+
+                <h3>2. Netzwerkzugang (WLAN)</h3>
+                <p>Die Zugangsdaten für das WLAN im Kursraum lauten:</p>
+                <ul class="styled-list">
+                    <li><strong>SSID:</strong> SAP</li>
+                    <li><strong>Passwort:</strong> [WLAN-Passwort]</li>
+                </ul>
+                
+                <h3>3. SAP-GUI einrichten (System A4H)</h3>
+                <p>Richte die Verbindung im SAP GUI wie folgt ein:</p>
+                <ol class="styled-list">
+                    <li>Neue Verbindung hinzufügen.</li>
+                    <li>Zu den "Erweiterten Einstellungen" wechseln.</li>
+                    <li>Den <strong>Expertenmodus</strong> aktivieren.</li>
+                    <li>Folgenden Connection-String eintragen: <code>conn=/H/[Server-IP]/S/3200</code>.</li>
+                    <li>Als Beschreibung z.B. <strong>A4H</strong> vergeben.</li>
+                    <li>Speichern.</li>
+                </ol>
+
+                <h3>4. Anmeldung am SAP-System</h3>
+                <p>Verwende diese Daten für die Anmeldung am SAP-System:</p>
+                <ul class="styled-list">
+                    <li><strong>Client:</strong> [Client]</li>
+                    <li><strong>User:</strong> [User-ID]</li>
+                    <li><strong>Password (Initial):</strong> [Initial-Passwort] (du wirst aufgefordert, es zu ändern)</li>
+                    <li><strong>Logon Language:</strong> DE</li>
+                </ul>
+                <p>Nach der Anmeldung landest du im <strong>SAP Easy Access</strong> Menü. Der "erste Schritt" in die Workbench erfolgt über die Transaktion <strong>SE80</strong>.</p>
+            </section>
+
+
+            <section id="grundlagen-architektur" class="content-section">
+                <h2>ABAP Grundlagen & Architektur</h2>
+                <p>
+                    ABAP (Advanced Business Application Programming) ist die Kernprogrammiersprache für die meisten Geschäftsanwendungen 
+                    im SAP-System, insbesondere SAP S/4HANA und SAP ERP.
+                </p>
+                <p>
+                    SAP-Systeme nutzen eine <strong>3-Schichten-Architektur</strong>:
+                    <ol>
+                        <li><strong>Präsentationsschicht (UI):</strong> Die Oberfläche, mit der Benutzer arbeiten, z.B. SAP GUI oder Fiori im Browser.</li>
+                        <li><strong>Anwendungsschicht (Applikation):</strong> Hier läuft dein ABAP-Code. Der <strong>ABAP Application Server</strong> verarbeitet die Geschäftslogik und Berechtigungen.</li>
+                        <li><strong>Datenbankschicht (Datenbank):</strong> Speichert die Daten (z.B. SAP HANA).</li>
+                    </ol>
+                    ABAP-Entwickler arbeiten primär in der Anwendungsschicht und nutzen das <strong>ABAP Dictionary</strong> sowie <strong>Open SQL</strong> für datenbankunabhängige Zugriffe.
+                </p>
+                <p>
+                    Zentrale Artefakte sind <strong>Programme</strong> (Reports), <strong>Klassen</strong>, <strong>Funktionsbausteine</strong>, die <strong>Paketstruktur</strong> und
+                    <strong>Transporte</strong> zur Verteilung von Änderungen zwischen Systemen (DEV → QAS → PRD).
+                </p>
+            </section>
+
+            <section id="flugmodell" class="content-section">
+                <h2>Das SAP-Flugmodell (Kontext)</h2>
+                <p>
+                    Als zentrale Schulungs- und Beispiel-Datenbank verwendet SAP (und auch das BC400-Skript) das sogenannte <strong>Flugmodell</strong>. Es beschreibt die Beziehungen zwischen Fluggesellschaften, Flugverbindungen, Flügen und Buchungen.
+                </p>
+                <p>
+                    Die Kenntnis der wichtigsten Tabellen ist essenziell, um die meisten ABAP-Beispiele zu verstehen:
+                </p>
+                <ul class="styled-list">
+                    <li><code>SCARR</code>: Die Stammdatentabelle für <strong>Fluggesellschaften</strong> (z.B. 'LH' für Lufthansa, 'AA' für American Airlines). Enthält den Namen der Gesellschaft und die Währung.</li>
+                    <li><code>SPFLI</code>: Die Tabelle für <strong>Flugverbindungen</strong> (der "Flugplan"). Sie definiert, welche Gesellschaft (<code>CARRID</code>) regelmäßig eine bestimmte Strecke (<code>CONNID</code>) fliegt, z.B. von <code>AIRPFROM</code> (Abflughafen) nach <code>AIRPTO</code> (Zielhafen).</li>
+                    <li><code>SFLIGHT</code>: Die Tabelle für <strong>konkrete Flüge</strong>. Sie bezieht sich auf eine Flugverbindung (<code>CARRID</code>, <code>CONNID</code>) und fügt ein Datum (<code>FLDATE</code>) hinzu. Hier sind auch Daten zur Belegung (<code>SEATSMAX</code>, <code>SEATSOCC</code>) gespeichert.</li>
+                    <li><code>SBOOK</code>: Die Tabelle der <strong>Flugbuchungen</strong>. Jede Buchung bezieht sich auf einen konkreten Flug (<code>CARRID</code>, <code>CONNID</code>, <code>FLDATE</code>) und einen Kunden (<code>CUSTOMID</code>).</li>
+                </ul>
+                <p>
+                    Diese Tabellen werden im ABAP Dictionary (SE11) definiert und in fast allen Beispielen zu Open SQL, ALV, Dynpros und Web Dynpros verwendet.
+                </p>
+            </section>
+
+            <section id="entwicklungsumgebung" class="content-section">
+                <h2>Entwicklungsumgebung (SE80/ADT)</h2>
+                <p>
+                    Entwicklung erfolgt klassisch in der <strong>SE80</strong> (Object Navigator) oder modern in <strong>ABAP Development Tools (ADT)</strong> in Eclipse.
+                    Der empfohlene Weg ist ADT für moderne Syntax, Quick Fixes, Unit Tests und integrierte Tools.
+                </p>
+                <p>
+                    Artefakte werden in <strong>Paketen</strong> organisiert. Lokale Objekte (<code>$TMP</code>) sind transportfrei, produktive Objekte benötigen ein Paket und
+                    eine <strong>Transportaufgabe</strong>.
+                </p>
+            </section>
+
+            <section id="datentypen-dictionary" class="content-section">
+                <h2>Datentypen & Datenwörterbuch</h2>
+                <p>
+                    ABAP kennt elementare Typen (z.B. <code>I</code>, <code>P</code>, <code>STRING</code>, <code>D</code>, <code>T</code>) sowie abgeleitete Typen aus dem <strong>ABAP Dictionary</strong>.
+                </p>
+                <p>
+                    Das Dictionary (Transaktion SE11) definiert <strong>Domänen</strong> (technische Typen), <strong>Datenelemente</strong> (semantische Bedeutung/Texte) und <strong>Tabellentypen</strong>.
+                    Es stellt Konsistenz zwischen Programmen und Datenbank sicher (Längen, Wertebereiche, F4-Hilfen, Texte).
+                </p>
+            </section>
+
+            <section id="interne-tabellen" class="content-section">
+                <h2>Interne Tabellen</h2>
+                <p>
+                    Interne Tabellen sind das zentrale Arbeitsmittel zur Verarbeitung von Datenmengen im Speicher. Typen: <strong>Standard</strong> (ohne eindeutigen Schlüssel),
+                    <strong>Sortiert</strong> (sortierter Schlüssel), <strong>Hash</strong> (eindeutiger Hash-Schlüssel).
+                </p>
+                <p>
+                    Häufige Operationen: <code>APPEND</code>, <code>INSERT</code>, <code>READ TABLE ... WITH KEY ...</code>, <code>LOOP AT</code>, <code>SORT</code>, <code>DELETE</code>.
+                    In moderner Syntax kommen Ausdrücke wie <strong>FILTER</strong>, <strong>REDUCE</strong> und <strong>FOR</strong> hinzu.
+                </p>
+                <p>
+                    <strong>Wichtiger Hinweis (Kopfzeilen):</strong> In den BC400-Skripten wird der Unterschied zwischen modernen internen Tabellen (mit explizitem Arbeitsbereich, z.B. <code>DATA gs_data LIKE LINE OF gt_data</code>) und der <strong>veralteten</strong> Syntax mit <strong>Kopfzeile</strong> (Header Line) betont. Bei der Kopfzeilen-Syntax (z.B. <code>DATA itab TYPE table WITH HEADER LINE</code>) dient die Tabelle selbst implizit als Arbeitsbereich. Diese alte Syntax sollte in neuen Entwicklungen (wie in allen Beispielen auf dieser Seite) nicht mehr verwendet werden, da sie zu unleserlichem Code führt.
+                </p>
+            </section>
+
+            <section id="modularisierung" class="content-section">
+                <h2>Modularisierung in ABAP</h2>
+                <p>
+                    Wiederverwendung und Strukturierung über <strong>Unterprogramme (FORM)</strong>, <strong>Funktionsbausteine</strong> (Transaktion SE37) (remote-fähig via RFC),
+                    <strong>Methoden</strong> in Klassen (Transaktion SE24) und <strong>Includes</strong> zur Code-Aufteilung.
+                </p>
+                <p>
+                    Eine spezielle, standardisierte Form von Funktionsbausteinen sind <strong>BAPIs</strong> (Business Application Programming Interfaces). Sie werden im <strong>Business Object Repository (BOR)</strong> (Kap. 4, Lektion 5) verwaltet und dienen als stabile Schnittstellen, um auf SAP-Geschäftsobjekte (z.B. einen Kundenauftrag) zuzugreifen. Sie sind immer RFC-fähig und werden oft von externen Systemen genutzt.
+                </p>
+                <p>
+                    Best Practice: Neue Entwicklungen objektorientiert (globale/lokale Klassen), klare Schnittstellen und Unit Tests.
+                </p>
+            </section>
+
+            <section id="open-sql" class="content-section">
+                <h2>Open SQL Grundlagen</h2>
+                <p>
+                    Open SQL kapselt DB-Zugriffe datenbankunabhängig. Kernbefehle: <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>, <code>MODIFY</code>.
+                    Moderne Syntax nutzt Inline-Deklaration (<code>@DATA</code>) und <code>INTO @DATA(itab)</code>.
+                </p>
+                <p>
+                    Joins, Aggregationen, <code>WHERE</code>, <code>ORDER BY</code>, <code>GROUP BY</code> sind verfügbar. Für semantische Modellierung und HANA-Nutzung (Stichwort "Code Pushdown"):
+                    <strong>ABAP CDS Views</strong> mit Annotationen (z.B. für OData/Analytik).
+                </p>
+            </section>
+
+            <section id="selektionsbild" class="content-section">
+                <h2>Selektionsbild & klassische Listen</h2>
+                <p>
+                    Reports (Transaktion SE38) definieren Eingaben via <code>PARAMETERS</code> und <code>SELECT-OPTIONS</code> (<code>SELECTION-SCREEN</code>).
+                    Klassische Ausgabe per <code>WRITE</code>, einfache Formatierung, Hotspots und basic Interaktion.
+                </p>
+            </section>
+
+            <section id="alv" class="content-section">
+                <h2>ALV (Simple/OO)</h2>
+                <p>
+                    Für tabellarische Ausgaben: <strong>ALV</strong>. Modern bevorzugt: <code>CL_SALV_TABLE</code> für schnelle OO-ALV-Listen.
+                    Alternativ klassische Funktionsbausteine (<code>REUSE_ALV_GRID_DISPLAY</code>).
+                </p>
+                <p>
+                    <strong>Hinweis (Kap. 9):</strong> Eine weitere wichtige Variante ist die Klasse <code>CL_GUI_ALV_GRID</code>. Im Gegensatz zu <code>CL_SALV_TABLE</code> (das den Bildschirm "übernimmt"), wird <code>CL_GUI_ALV_GRID</code> verwendet, um ein ALV-Gitter in einen <strong>Container</strong> auf einem <strong>klassischen Dynpro</strong> (siehe Kapitel 8 des Skripts) einzubetten.
+                </p>
+                <p>
+                    Funktionen: Sortieren, Filtern, Summen, Layouts sichern, Export.
+                </p>
+            </section>
+
+            <section id="debugging" class="content-section">
+                <h2>Debugging & Fehlerbehandlung</h2>
+                <p>
+                    Fehlerbehandlung per <strong>Ausnahmen</strong> (klassisch <code>RAISE</code>, OO <code>RAISE EXCEPTION</code>), <code>MESSAGE</code>-Klassen (Transaktion SE91), <code>TRY...CATCH</code>.
+                    Debugger (ADT/SE80) unterstützt Breakpoints, Watchpoints, Variablen-Inspektion. Bei Laufzeitfehlern hilft die Transaktion <strong>ST22</strong> (Dump-Analyse).
+                </p>
+                <p>
+                    Qualitätssicherung über <strong>ABAP Unit</strong> und <strong>ATC</strong> (Code-Checks). <strong>(Ergänzung zu Kap. 11):</strong> Die technische Basis für ATC ist oft der <strong>Code Inspector (Transaktion SCI)</strong>, der detaillierte statische Analysen (Performance, Sicherheit, Syntax) für ABAP-Objekte durchführt.
+                </p>
+            </section>
+
+            <section id="tcodes" class="content-section">
+                <h2>Anhang: Wichtige Transaktionen (Nachschlagen)</h2>
+                <p>
+                    Hier ist eine Übersicht der wichtigsten Transaktionscodes aus dem Kurs (Quelle: `SAP-Transaktionen.pdf`).
+                </p>
+                <ul class="styled-list">
+                    <li><strong>SE80:</strong> Object Navigator - Zentrale Entwicklungsumgebung.</li>
+                    <li><strong>SE38:</strong> Editor für ABAP-Programme.</li>
+                    <li><strong>SE24:</strong> Klassen-Builder (ABAP-OO-Klassen).</li>
+                    <li><strong>SE37:</strong> Funktionsbaustein-Workbench.</li>
+                    <li><strong>SE11:</strong> ABAP Dictionary (Tabellen, Views, Datenelemente etc.).</li>
+                    <li><strong>SE93:</strong> Transaktionscode-Pflege (Eigene Transaktionen anlegen).</li>
+                    <li><strong>SE91:</strong> Nachrichtenklassen pflegen.</li>
+                    <li><strong>SE16 / SE16N:</strong> Data Browser (Tabellenanzeige).</li>
+                    <li><strong>ST22:</strong> Dump-Analyse (Laufzeitfehler).</li>
+                    <li><strong>SM37:</strong> Job-Übersicht (Hintergrundjobs).</li>
+                    <li><strong>SE41:</strong> Menü Painter.</li>
+                    <li><strong>SE51:</strong> Screen Painter (Dynpros).</li>
+                    <li><strong>SA38:</strong> Starten von ABAP-Programmen.</li>
+                </ul>
+            </section>
+<section id="entwicklungsumgebung" class="content-section">
+                <h2>Entwicklungsumgebung (SE80/ADT)</h2>
+                <p>
+                    Entwicklung erfolgt klassisch in der <strong>SE80</strong> (Object Navigator) oder modern in <strong>ABAP Development Tools (ADT)</strong> in Eclipse.
+                    <strong>(Kap. 12)</strong> ADT ist eine Eclipse-basierte IDE [cite: 4989], die sich über ein "ABAP-Projekt" [cite: 5040, 5052] mit dem SAP-System verbindet. Sie bietet native Editoren für Programme und Klassen [cite: 5098, 5104] und integriert SAP-GUI-Fenster für ältere Werkzeuge (wie Dynpro oder Dictionary-Objekte), für die es keinen nativen Editor gibt[cite: 5097, 5126].
+                </p>
+                <p>
+                    Artefakte werden in <strong>Paketen</strong> organisiert. Lokale Objekte (<code>$TMP</code>) sind transportfrei, produktive Objekte benötigen ein Paket und
+                    eine <strong>Transportaufgabe</strong>.
+                </p>
+            </section>
+        </main>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="js/layout.js" defer></script>
+    <script src="js/progress.js" defer></script>
+</body>
+</html>

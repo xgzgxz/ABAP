@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABAP Lexikon (WI 2541)</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+    <div id="header-placeholder"></div>
+
+    <nav id="main-navigation">
+        <div id="navigation-placeholder"></div>
+    </nav>
+
+    <div class="page-wrapper">
+        <aside class="sidebar">
+            <div class="search-container">
+                <input type="search" id="lexicon-search" placeholder="Lexikon durchsuchen...">
+            </div>
+            <nav class="sidebar-navigation">
+                <h3 class="sidebar-title">Begriffe</h3>
+                <ul>
+                    <li><a href="#a">A</a></li>
+                    <li><a href="#b">B</a></li>
+                    <li><a href="#c">C</a></li>
+                    <li><a href="#d">D</a></li>
+                    <li><a href="#e">E</a></li>
+                    <li><a href="#f">F</a></li>
+                    <li><a href="#h">H</a></li>
+                    <li><a href="#i">I</a></li>
+                    <li><a href="#j">J</a></li>
+                    <li><a href="#k">K</a></li>
+                    <li><a href="#l">L</a></li>
+                    <li><a href="#m">M</a></li>
+                    <li><a href="#o">O</a></li>
+                    <li><a href="#p">P</a></li>
+                    <li><a href="#r">R</a></li>
+                    <li><a href="#s">S</a></li>
+                    <li><a href="#t">T</a></li>
+                    <li><a href="#u">U</a></li>
+                    <li><a href="#v">V</a></li>
+                    <li><a href="#w">W</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <h1>ABAP Lexikon</h1>
+            <p>Eine Sammlung der wichtigsten Begriffe, die auf dieser Webseite erwähnt werden.</p>
+
+            <div class="lexicon-container">
+                <h2 id="a">A</h2>
+                <dl class="lexicon-entry">
+                    <dt>ABAP (Advanced Business Application Programming)</dt>
+                    <dd>Die primäre Programmiersprache für Geschäftsanwendungen im SAP-Umfeld. Sie ist ereignisgesteuert und wird auf dem ABAP Application Server ausgeführt.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>ABAP Dictionary (SE11)</dt>
+                    <dd>Zentrales Werkzeug zur Definition und Verwaltung von datenbankunabhängigen Datentypen und Datenbankobjekten. Hier werden Tabellen, Views, Datenelemente, Domänen etc. angelegt.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>ABAP Editor (SE38)</dt>
+                    <dd>Die Entwicklungsumgebung zum Schreiben, Testen und Ausführen von ABAP-Programmen (Reports).</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>ADT (ABAP Development Tools)</dt>
+                    <dd>Eine moderne, auf Eclipse basierende Entwicklungsumgebung für ABAP, die Features wie Quick Fixes, Refactoring und integrierte Testwerkzeuge bietet.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>ALV (ABAP List Viewer)</dt>
+                    <dd>Ein mächtiges Werkzeug zur Darstellung von tabellarischen Daten in Listenform. Bietet Standardfunktionen wie Sortieren, Filtern, Summenbildung und Layout-Verwaltung. Die moderne Variante für Reports ist <code>CL_SALV_TABLE</code>. Für die Einbettung in Dynpros wird <code>CL_GUI_ALV_GRID</code> verwendet.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Anwendungsschicht (Application Layer)</dt>
+                    <dd>Die mittlere Schicht in der 3-Schichten-Architektur, auf der die ABAP-Anwendungslogik im Application Server ausgeführt wird.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Append-Struktur</dt>
+                    <dd>Eine Erweiterungstechnik im ABAP Dictionary. Dient dazu, kundeneigene Felder an Standard-SAP-Tabellen, -Strukturen oder -Views anzuhängen, ohne das SAP-Objekt selbst zu modifizieren.</dd>
+                </dl>
+
+                <h2 id="b">B</h2>
+                <dl class="lexicon-entry">
+                    <dt>BAdI (Business Add-In)</dt>
+                    <dd>Die moderne, objektorientierte (OO) Form der Erweiterung (Exits). SAP definiert ein Interface, und der Kunde kann eine oder mehrere Klassen implementieren, die dieses Interface implementieren, um die Standardlogik zu erweitern.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>BAPI (Business Application Programming Interface)</dt>
+                    <dd>Eine standardisierte, RFC-fähige Schnittstelle (meist ein Funktionsbaustein) zur Interaktion mit SAP-Geschäftsobjekten (z.B. 'Kunde anlegen'). BAPIs werden über das BOR (Business Object Repository) verwaltet.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>BOR (Business Object Repository)</dt>
+                    <dd>Das BOR (Kap. 4, Lektion 5) ist ein zentrales Verzeichnis im SAP-System, das Geschäftsobjekte (z.B. 'Kunde', 'Auftrag') und deren Methoden (BAPIs) kapselt.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Breakpoint</dt>
+                    <dd>Ein Haltepunkt im Quellcode, der die Ausführung des Programms im Debugger an dieser Stelle unterbricht, um eine Analyse zu ermöglichen.</dd>
+                </dl>
+
+                <h2 id="c">C</h2>
+                <dl class="lexicon-entry">
+                    <dt>CDS Views (Core Data Services)</dt>
+                    <dd>Eine moderne Technologie zur Definition von semantischen Datenmodellen direkt auf der Datenbank (z.B. SAP HANA). Sie erweitern SQL um Annotationen und ermöglichen "Code Pushdown".</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Client (Mandant)</dt>
+                    <dd>Eine organisatorisch und technisch eigenständige Einheit innerhalb eines SAP-Systems mit eigenen Stammdaten und Bewegungsdaten. Die Anmeldung erfolgt immer an einem bestimmten Mandanten.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Code Inspector (SCI)</dt>
+                    <dd>Ein Werkzeug (Transaktion <code>SCI</code>) zur statischen Analyse von ABAP-Code und anderen Repository-Objekten. Es prüft auf Performance-Probleme, Sicherheitslücken, Syntaxfehler und Einhaltung von Programmierrichtlinien. Es ist die Basis für das ABAP Test Cockpit (ATC).</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt><code>CONCATENATE</code></dt>
+                    <dd>ABAP-Anweisung zur Verkettung von mehreren Zeichenketten.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Customer-Exit</dt>
+                    <dd>Eine ältere Erweiterungstechnik (verwaltet über <code>SMOD</code>/<code>CMOD</code>). SAP ruft an definierten Stellen einen Funktionsbaustein (<code>CALL CUSTOMER-FUNCTION</code>) auf, den der Kunde mit eigener Logik füllen kann. Beinhaltet oft auch Menü- und Dynpro-Exits.</dd>
+                </dl>
+
+                <h2 id="d">D</h2>
+                <dl class="lexicon-entry">
+                    <dt>Datenelement</dt>
+                    <dd>Ein Objekt im ABAP Dictionary, das die semantische Bedeutung eines Feldes beschreibt (z.B. Feldbezeichner, F1-Hilfe). Es referenziert eine Domäne.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Datenbankschicht (Database Layer)</dt>
+                    <dd>Die unterste Schicht der 3-Schichten-Architektur, die für die physische Speicherung der Daten zuständig ist (z.B. eine SAP HANA Datenbank).</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Debugger</dt>
+                    <dd>Ein Werkzeug zur schrittweisen Analyse eines Programms zur Laufzeit. Er wird oft mit <code>/h</code> im Befehlsfeld gestartet.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Domäne</dt>
+                    <dd>Ein Objekt im ABAP Dictionary, das die technischen Eigenschaften eines Feldes definiert (Datentyp, Länge, Wertebereich).</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt><code>DO</code>-Schleife</dt>
+                    <dd>Eine Schleifenstruktur in ABAP, die entweder eine feste Anzahl von Durchläufen (<code>DO n TIMES</code>) oder eine Endlosschleife (die mit <code>EXIT</code> verlassen werden muss) implementiert.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Dynpro (Dynamic Program)</dt>
+                    <dd>Ein "Bild" (Screen) einer klassischen ABAP-Anwendung (Transaktion <code>SE51</code>). Es besteht aus einem Layout (visuelle Elemente), einer Elementliste (Variablen) und einer Ablauflogik (PBO und PAI).</dd>
+                </dl>
+
+                <h2 id="e">E</h2>
+                <dl class="lexicon-entry">
+                    <dt>Erweiterung (Enhancement)</dt>
+                    <dd>Der von SAP empfohlene, "saubere" Weg, um SAP-Standardanwendungen anzupassen. Dabei wird an vordefinierten "Hooks" (z.B. BAdIs, Customer-Exits) kundeneigener Code eingefügt, ohne das SAP-Originalobjekt zu verändern. Erweiterungen sind upgrade-sicher.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Exception (Ausnahme)</dt>
+                    <dd>Ein Mechanismus zur Fehlerbehandlung. In Funktionsbausteinen (klassisch) oder Methoden (klassenbasiert) können Ausnahmen definiert werden, die im Fehlerfall ausgelöst und vom aufrufenden Programm behandelt werden können.</dd>
+                </dl>
+
+                <h2 id="f">F</h2>
+                <dl class="lexicon-entry">
+                    <dt>Funktionsbaustein (Function Module)</dt>
+                    <dd>Eine wiederverwendbare, prozedurale Code-Einheit mit einer definierten Schnittstelle (Import, Export, Changing, Tables, Exceptions). Wird in der Transaktion <code>SE37</code> gepflegt.</dd>
+                </dl>
+
+                <h2 id="h">H</h2>
+                <dl class="lexicon-entry">
+                    <dt>Hash-Tabelle</dt>
+                    <dd>Ein Typ einer internen Tabelle, der für extrem schnelle Lesezugriffe über einen eindeutigen Schlüssel optimiert ist. Der Zugriff erfolgt über einen Hash-Algorithmus.</dd>
+                </dl>
+
+                <h2 id="i">I</h2>
+                <dl class="lexicon-entry">
+                    <dt><code>IF</code>-Anweisung</dt>
+                    <dd>Eine grundlegende Ablaufsteuerungsstruktur für bedingte Logik (Verzweigungen). Besteht aus <code>IF</code>, optional <code>ELSEIF</code> und <code>ELSE</code>, und wird mit <code>ENDIF</code> abgeschlossen.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Include</dt>
+                    <dd>Ein ABAP-Programmtyp, der dazu dient, Quellcode zu strukturieren, indem er in andere Programme eingebunden wird. Er kann nicht eigenständig ausgeführt werden.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Interne Tabelle</dt>
+                    <dd>Ein zentrales Konstrukt in ABAP zur Haltung und Verarbeitung von tabellarischen Daten im Arbeitsspeicher eines Programms. Es gibt die Typen Standard, Sortiert und Hash.</dd>
+                </dl>
+
+                <h2 id="j">J</h2>
+                <dl class="lexicon-entry">
+                    <dt>JOIN</dt>
+                    <dd>Eine Operation in Open SQL, um Daten aus zwei oder mehr Datenbanktabellen basierend auf einer Verknüpfungsbedingung zu kombinieren.</dd>
+                </dl>
+
+                <h2 id="k">K</h2>
+                <dl class="lexicon-entry">
+                    <dt>Kettensatz</dt>
+                    <dd>Eine syntaktische Vereinfachung in ABAP, um mehrere Anweisungen mit demselben einleitenden Schlüsselwort zusammenzufassen. Beginnt mit einem Doppelpunkt (<code>:</code>) und trennt die Teile mit Kommas (<code>,</code>).</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Klasse</dt>
+                    <dd>Das zentrale Konstrukt der objektorientierten Programmierung in ABAP. Sie kapselt Daten (Attribute) und Verhalten (Methoden). Wird im Class Builder (<code>SE24</code>) oder lokal im Programm definiert.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Kopfzeile (Header Line)</dt>
+                    <dd>Eine veraltete Methode (implizite Syntax), um einen Arbeitsbereich für eine interne Tabelle zu deklarieren. Dabei hat die interne Tabelle selbst eine Kopfzeile, die denselben Namen wie die Tabelle trägt. Moderne ABAP-Entwicklung (explizite Syntax) verwendet stattdessen separate Arbeitsbereiche (z.B. mittels <code>DATA gs_data LIKE LINE OF gt_data</code>).</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Kurzdump</dt>
+                    <dd>Ein Laufzeitfehler, der die Ausführung eines Programms abbricht. Kann in der Transaktion <code>ST22</code> analysiert werden.</dd>
+                </dl>
+
+                <h2 id="l">L</h2>
+                <dl class="lexicon-entry">
+                    <dt>Literal</dt>
+                    <dd>Ein fester Wert im Quellcode. Textliterale werden in Hochkommata (<code>'...'</code>) geschrieben, Zahlenliterale direkt.</dd>
+                </dl>
+
+                <h2 id="m">M</h2>
+                <dl class="lexicon-entry">
+                    <dt>Methode</dt>
+                    <dd>Eine Funktion oder Prozedur, die zu einer Klasse gehört und deren Verhalten implementiert.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Modifikation (Reparatur)</dt>
+                    <dd>Die direkte Änderung (eine "Reparatur") am SAP-Standardcode oder -Objekt. Dies ist nicht upgrade-sicher und erfordert einen manuellen Modifikationsabgleich (<code>SPAU</code>) nach jedem Upgrade. Erfordert SSCR-Schlüssel.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Modularisierung</dt>
+                    <dd>Das Aufteilen von Code in wiederverwendbare, gekapselte Einheiten wie Unterprogramme, Funktionsbausteine oder Methoden, um Redundanz zu vermeiden und die Wartbarkeit zu verbessern.</dd>
+                </dl>
+
+                <h2 id="o">O</h2>
+                <dl class="lexicon-entry">
+                    <dt>Open SQL</dt>
+                    <dd>Die datenbankunabhängige Datenbanksprache von ABAP. Anweisungen wie <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code> werden vom ABAP Application Server in das native SQL der jeweiligen Datenbank übersetzt.</dd>
+                </dl>
+
+                <h2 id="p">P</h2>
+                <dl class="lexicon-entry">
+                    <dt>PAI (Process After Input)</dt>
+                    <dd>Ein Ereignisblock in der Ablauflogik eines Dynpros. Die Module in diesem Block werden ausgeführt, *nachdem* der Benutzer eine Aktion auf dem Bild ausgeführt hat (z.B. Enter gedrückt oder einen Button geklickt hat).</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Paket (Package)</dt>
+                    <dd>Ein Container für zusammengehörige Entwicklungsobjekte. Pakete steuern die Transportierbarkeit von Objekten. Objekte im lokalen Paket <code>$TMP</code> sind nicht transportierbar.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt><code>PARAMETERS</code></dt>
+                    <dd>ABAP-Schlüsselwort zur Definition eines einzelnen Eingabefeldes auf einem Selektionsbild.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>PBO (Process Before Output)</dt>
+                    <dd>Ein Ereignisblock in der Ablauflogik eines Dynpros. Die Module in diesem Block werden ausgeführt, *bevor* das Bild (Dynpro) dem Benutzer angezeigt wird. Wird typischerweise verwendet, um Felder vorzubelegen oder den GUI-Status zu setzen.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Präsentationsschicht (Presentation Layer)</dt>
+                    <dd>Die oberste Schicht der 3-Schichten-Architektur, die die Benutzeroberfläche darstellt (z.B. SAP GUI oder ein Webbrowser mit Fiori).</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Pretty Printer</dt>
+                    <dd>Ein Werkzeug im ABAP Editor, das den Quellcode automatisch formatiert (z.B. Einrückungen, Groß-/Kleinschreibung), um die Lesbarkeit zu verbessern.</dd>
+                </dl>
+
+                <h2 id="r">R</h2>
+                <dl class="lexicon-entry">
+                    <dt>RFC (Remote Function Call)</dt>
+                    <dd>Ein Protokoll, das den Aufruf eines Funktionsbausteins in einem anderen SAP-System oder von einem externen System aus ermöglicht. BAPIs sind ein typischer Anwendungsfall für RFC.</dd>
+                </dl>
+
+                <h2 id="s">S</h2>
+                <dl class="lexicon-entry">
+                    <dt>SAP GUI</dt>
+                    <dd>Die grafische Benutzeroberfläche für den Zugriff auf SAP-Systeme. Sie ist die klassische Präsentationsschicht.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>SCARR</dt>
+                    <dd>Eine Datenbanktabelle aus dem SAP-Flugmodell. Sie enthält die Stammdaten der Fluggesellschaften (z.B. 'LH' für Lufthansa).</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>SE80 (Object Navigator)</dt>
+                    <dd>Die zentrale Transaktion der klassischen ABAP Workbench. Sie bietet eine baumartige Übersicht über alle Entwicklungsobjekte in einem Paket.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Selektionsbild (Selection Screen)</dt>
+                    <dd>Die standardisierte Eingabemaske eines ausführbaren ABAP-Programms, die mit <code>PARAMETERS</code> und <code>SELECT-OPTIONS</code> definiert wird.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt><code>SELECT</code></dt>
+                    <dd>Die zentrale Open-SQL-Anweisung zum Lesen von Daten aus Datenbanktabellen.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt><code>SELECT-OPTIONS</code></dt>
+                    <dd>ABAP-Schlüsselwort zur Definition eines komplexen Eingabebereichs auf einem Selektionsbild, der Einzelwerte, Intervalle und Muster erlaubt.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Sortierte Tabelle</dt>
+                    <dd>Ein Typ einer internen Tabelle, deren Einträge immer nach ihrem Schlüssel sortiert sind. Dies ermöglicht schnelle Lesezugriffe über binäre Suche.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>SPFLI</dt>
+                    <dd>Eine Datenbanktabelle aus dem SAP-Flugmodell. Sie enthält den Flugplan, d.h. die permanenten Flugverbindungen (z.B. 'LH 400' von Frankfurt nach New York).</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>SSCR (SAP Software Change Registration)</dt>
+                    <dd>Ein Registrierungsverfahren, das erforderlich ist, um Modifikationen am SAP-Standard durchzuführen. Man benötigt einen <strong>Entwicklerschlüssel</strong> (einmalig pro User) und einen <strong>Objektschlüssel</strong> (pro modifiziertem Objekt).</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Standardtabelle</dt>
+                    <dd>Der flexibelste Typ einer internen Tabelle. Der Zugriff erfolgt über einen Index oder linear über den Schlüssel. Sie hat keinen fest definierten Schlüssel.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Systemfeld</dt>
+                    <dd>Eine vordefinierte globale Variable, die zur Laufzeit vom System mit Informationen versorgt wird (z.B. <code>SY-SUBRC</code>, <code>SY-DATUM</code>, <code>SY-INDEX</code>).</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt><code>SY-SUBRC</code></dt>
+                    <dd>Ein wichtiges Systemfeld, das den Rückgabewert (Erfolgscode) einer Anweisung anzeigt. Ein Wert von 0 bedeutet in der Regel "erfolgreich", ein Wert ungleich 0 signalisiert einen Fehler oder eine besondere Bedingung.</dd>
+                </dl>
+
+                <h2 id="t">T</h2>
+                <dl class="lexicon-entry">
+                    <dt>Transaktion</dt>
+                    <dd>Ein Kürzel (Transaktionscode), das eine bestimmte Funktion oder ein Programm im SAP-System aufruft (z.B. <code>SE80</code>, <code>ST22</code>). Report-Transaktionen können in <code>SE93</code> angelegt werden.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Transport</dt>
+                    <dd>Ein Mechanismus, um Entwicklungsobjekte (z.B. Programme, Tabellen) von einem System in ein anderes zu übertragen (z.B. vom Entwicklungs- ins Testsystem).</dd>
+                </dl>
+
+                <h2 id="u">U</h2>
+                <dl class="lexicon-entry">
+                    <dt>User-Exit</dt>
+                    <dd>Die älteste Form der Erweiterungstechnik, oft als leere Unterprogramme (FORMs) in Standardprogrammen (z.B. im SD-Modul) implementiert, die der Kunde mit Logik füllen kann.</dd>
+                </dl>
+
+                <h2 id="v">V</h2>
+                <dl class="lexicon-entry">
+                    <dt>Variable</dt>
+                    <dd>Ein benannter Datencontainer im Programm, der zur Laufzeit Werte speichern kann. Wird in ABAP mit <code>DATA</code> deklariert.</dd>
+                </dl>
+
+                <h2 id="w">W</h2>
+                <dl class="lexicon-entry">
+                    <dt>Watchpoint</dt>
+                    <dd>Ein spezieller Haltepunkt im Debugger, der die Programmausführung stoppt, sobald sich der Wert einer bestimmten Variable ändert.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt>Web Dynpro ABAP</dt>
+                    <dd>Eine moderne SAP-Technologie zur Erstellung von Web-basierten Benutzeroberflächen. Es folgt strikt dem Model-View-Controller (MVC) Design-Pattern und nutzt Konzepte wie Views, Windows, Controller und einen Daten-Context zur Datenbindung.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt><code>WHILE</code>-Schleife</dt>
+                    <dd>Eine Schleifenstruktur, die den Schleifenkörper so lange ausführt, wie eine angegebene Bedingung wahr ist. Die Bedingung wird vor jedem Durchlauf geprüft.</dd>
+                </dl>
+                <dl class="lexicon-entry">
+                    <dt><code>WRITE</code></dt>
+                    <dd>Die klassische ABAP-Anweisung zur Ausgabe von Daten in einer Liste.</dd>
+                </dl>
+            </div>
+        </main>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/layout.js" defer></script>
+    <script src="../js/progress.js" defer></script>
+    <script src="../js/lexikon-search.js" defer></script>
+</body>
+</html>

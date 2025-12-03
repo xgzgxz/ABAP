@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAP ABAP Theorie-Quiz</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+    <!-- Platzhalter für den Header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Hauptnavigation -->
+    <nav id="main-navigation">
+        <div id="navigation-placeholder"></div>
+    </nav>
+
+    <main class="main-content">
+        <section class="quiz-section">
+            
+            <div id="quiz-start-screen">
+                <h2>Bereit, dein ABAP-Wissen zu testen?</h2>
+                
+                <div class="quiz-settings">
+                    <div class="setting-option">
+                        <input type="checkbox" id="shuffle-questions-toggle" checked>
+                        <label for="shuffle-questions-toggle">Fragen mischen</label>
+                    </div>
+                    <div class="setting-option">
+                        <input type="checkbox" id="shuffle-answers-toggle" checked>
+                        <label for="shuffle-answers-toggle">Antworten mischen</label>
+                    </div>
+
+                    <div id="chapter-selection">
+                        <h4>Kapitel auswählen</h4>
+                        <div class="setting-option">
+                            <input type="checkbox" id="select-all-chapters" checked>
+                            <label for="select-all-chapters">Alle Kapitel</label>
+                            <span id="deselect-all-chapters-btn" class="deselect-btn">Auswahl aufheben</span>
+                        </div>
+                        
+                        <div id="chapter-options-container">
+                            <!-- Checkboxen für Kapitel werden hier von JS eingefügt -->
+                        </div>
+                        
+                    </div>
+                </div>
+                <button id="start-quiz-btn">Quiz starten</button>
+            </div>
+
+            <div id="quiz-container" style="display: none;">
+                <p id="question-counter"></p>
+                <h2 id="question-text">Frage wird geladen...</h2>
+                <div id="answer-options"></div>
+                <p id="feedback-text"></p>
+                <div id="explanation-text" style="display: none;"></div>
+                <div id="quiz-buttons">
+                    <button id="check-answer-btn">Antwort prüfen</button>
+                    <button id="next-question-btn" style="display: none;">Nächste Frage</button>
+                </div>
+            </div>
+            <div id="quiz-end-screen" style="display: none;">
+                <h2>Quiz beendet!</h2>
+                <p id="quiz-score"></p>
+                <div id="quiz-end-buttons">
+                    <button id="repeat-incorrect-btn" style="display: none;">Falsche Fragen wiederholen</button>
+                    <button id="restart-quiz-btn">Ganzes Quiz neu starten</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Platzhalter für den Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/layout.js" defer></script>
+    <script src="../js/workbench-quiz.js" defer></script>
+    <script src="../js/progress.js" defer></script>
+</body>
+</html>

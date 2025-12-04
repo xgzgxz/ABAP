@@ -581,6 +581,35 @@ ol.styled-list li:hover::before { transform: none; }
     font-family: 'Courier New', Courier, monospace;
 }
 
+/* Code-Elemente allgemein */
+code {
+    background-color: var(--background-dark);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+pre {
+    background-color: var(--background-dark);
+    padding: 1em;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    overflow-x: auto;
+    margin: 1.5em 0;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    white-space: pre;
+    word-wrap: normal;
+    overflow-wrap: normal;
+}
+
 /* Footer */
 footer {
   text-align: center;

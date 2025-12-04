@@ -179,6 +179,48 @@ body {
   top: 6px;
   z-index: 1000;
   border-bottom: 1px solid var(--border-color);
+  position: relative;
+}
+
+/* Burger Menu */
+.burger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.burger-menu span {
+  width: 2rem;
+  height: 0.25rem;
+  background: var(--text-primary);
+  border-radius: 10px;
+  transition: all 0.3s linear;
+  position: relative;
+  transform-origin: 1px;
+}
+
+.burger-menu.active span:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+.burger-menu.active span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.burger-menu.active span:nth-child(3) {
+  transform: rotate(-45deg);
 }
 #main-navigation ul {
   list-style: none;
@@ -551,12 +593,69 @@ footer {
 @media (max-width: 1200px) {
   .sidebar { display: none; }
 }
+
 @media (max-width: 768px) {
   .page-header h1 { font-size: 2.2em; }
   .content-section { padding: 1.5em; }
-  #main-navigation ul { flex-direction: column; align-items: center; padding: 0.2em 0; }
-  #main-navigation ul li a { width: 80%; text-align: center; }
+  
+  /* Burger Menu anzeigen */
+  .burger-menu {
+    display: flex;
+  }
+  
+  /* Navigation verstecken und als Dropdown anzeigen */
+  #main-navigation ul {
+    position: fixed;
+    top: 80px;
+    right: 0;
+    height: calc(100vh - 80px);
+    width: 300px;
+    flex-direction: column;
+    background-color: var(--background-card);
+    border-left: 1px solid var(--border-color);
+    padding: 2em 0;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    overflow-y: auto;
+  }
+  
+  #main-navigation ul.active {
+    transform: translateX(0);
+  }
+  
+  #main-navigation ul li {
+    width: 100%;
+  }
+  
+  #main-navigation ul li a {
+    width: 100%;
+    text-align: left;
+    padding: 1em 2em;
+    margin: 0;
+    border-radius: 0;
+  }
+  
+  .nav-search-item {
+    margin-left: 0;
+    width: 100%;
+    padding: 0 2em;
+  }
+  
+  #global-search {
+    width: 100%;
+  }
+  
+  #global-search:focus {
+    width: 100%;
+  }
 }
+
 @media (max-width: 480px) {
   #chapter-options-container { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+  
+  #main-navigation ul {
+    width: 100%;
+  }
+  
+  .page-header h1 { font-size: 1.8em; }
 }

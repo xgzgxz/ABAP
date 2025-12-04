@@ -68,6 +68,34 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     fixNavigationLinks();
 
+    // Burger Menu Toggle
+    const burgerToggle = document.getElementById('burger-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    
+    if (burgerToggle && navMenu) {
+        burgerToggle.addEventListener('click', () => {
+            burgerToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Menü schließen beim Klick auf einen Link
+        const navLinks = navMenu.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                burgerToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Menü schließen beim Klick außerhalb
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !burgerToggle.contains(e.target)) {
+                burgerToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+    }
+
     // Seitenspezifische Titel und Untertitel setzen
     const headerTitleEl = document.getElementById('header-title');
     const headerSubtitleEl = document.getElementById('header-subtitle');

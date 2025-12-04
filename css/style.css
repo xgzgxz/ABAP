@@ -369,6 +369,9 @@ ol.styled-list li:hover::before { transform: none; }
     border: 1px solid var(--border-color);
     border-radius: 8px;
     overflow: hidden; /* Wichtig für abgerundete Ecken */
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .content-section th,
@@ -597,6 +600,29 @@ footer {
 @media (max-width: 768px) {
   .page-header h1 { font-size: 2.2em; }
   .content-section { padding: 1.5em; }
+  .content-section h2 { font-size: 1.8em; word-wrap: break-word; }
+  .content-section h3 { font-size: 1.3em; word-wrap: break-word; }
+  .content-section h4 { font-size: 1.1em; word-wrap: break-word; }
+  
+  /* Tabellen auf mobilen Geräten */
+  .content-section table {
+    font-size: 0.9em;
+  }
+  
+  .content-section th,
+  .content-section td {
+    padding: 0.8em 0.6em;
+    min-width: 120px;
+  }
+  
+  .content-section thead th {
+    font-size: 1em;
+  }
+  
+  .content-section tbody td:first-child {
+    font-size: 0.95em;
+    min-width: 80px;
+  }
   
   /* Burger Menu anzeigen */
   .burger-menu {
@@ -658,4 +684,25 @@ footer {
   }
   
   .page-header h1 { font-size: 1.8em; }
+  .page-header p { font-size: 0.95em; }
+  
+  .content-section { padding: 1em; }
+  .content-section h2 { font-size: 1.5em; }
+  .content-section h3 { font-size: 1.2em; }
+  .content-section h4 { font-size: 1em; }
+  
+  /* Sehr kompakte Tabellen */
+  .content-section table {
+    font-size: 0.85em;
+  }
+  
+  .content-section th,
+  .content-section td {
+    padding: 0.6em 0.4em;
+    min-width: 100px;
+  }
+  
+  .content-section tbody td:first-child {
+    min-width: 70px;
+  }
 }

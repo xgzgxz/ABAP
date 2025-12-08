@@ -103,11 +103,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     const isIndexPage = path.endsWith('/') || path.includes("index.html");
 
     if (headerTitleEl && headerSubtitleEl) {
-        if (path.includes("theory-quiz.html")) {
-            headerTitleEl.textContent = "ABAP Theorie-Quiz";
-            headerSubtitleEl.textContent = "Teste dein Wissen zu SAP ABAP";
-        } else { // Gilt für index.html und alle zukünftigen Seiten
-            headerTitleEl.textContent = "SAP ABAP";
+        // Der Titel "SAP ABAP" soll immer zur Startseite verlinken
+        const homeLink = `<a href="${baseUrl}index.html" style="text-decoration: none; color: inherit;">SAP ABAP</a>`;
+
+        if (path.includes("grundlagen-quiz.html") || path.includes("workbench-quiz.html")) {
+            headerTitleEl.innerHTML = homeLink; // Haupttitel bleibt der Link
+            headerSubtitleEl.textContent = document.title; // Untertitel ist der Quiz-Name
+        } else { // Gilt für index.html und alle anderen Seiten
+            headerTitleEl.innerHTML = homeLink;
             headerSubtitleEl.textContent = document.title;
         }
     }
